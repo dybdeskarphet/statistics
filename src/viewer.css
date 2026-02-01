@@ -1,0 +1,181 @@
+:root {
+  --note-backgruond-color: #141311;
+  --toolbar-background: rgba(34, 31, 29, 0.9);
+  --shadow: rgba(0, 0, 0, 0.4);
+  --primary: #f5dfc6;
+  --outline: #494643;
+  --red: #ffb4ab;
+  --red-hovered: #690005;
+  --button-hovered: #524532;
+}
+
+/* Reset & Basic Layout */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+  background-color: var(--note-backgruond-color);
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+/* The Viewer Canvas */
+#openseadragon1 {
+  width: 100%;
+  height: 100%;
+  background-color: var(--note-backgruond-color);
+}
+
+/* --- Floating Toolbar --- */
+.toolbar {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--toolbar-background);
+  border: 1px solid var(--outline);
+  border-radius: 50px;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 1;
+}
+
+.toolbar.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+/* Buttons */
+.tool-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#hide-toolbar {
+  color: var(--red)
+}
+
+#show-toolbar {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  z-index: 999;
+  background: var(--toolbar-background);
+  color: var(--primary);
+  border: 1px solid var(--outline);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#show-toolbar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#show-toolbar:hover {
+  background: var(--button-hovered);
+  color: white;
+}
+
+.tool-btn:hover {
+  background: var(--button-hovered);
+  /* Hover color */
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.tool-btn:active {
+  transform: translateY(0);
+}
+
+/* Back Button */
+#back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 24px;
+  transition: color 0.2s;
+}
+
+#back-btn:hover {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    position: fixed;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    max-width: 90vw;
+    padding: 8px 16px;
+    gap: 0px;
+  }
+
+  #show-toolbar {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  #back-btn {
+    top: 20px;
+    left: 20px
+  }
+
+}
+
+@media (max-width: 380px) {
+  .toolbar {
+    position: fixed;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 8px;
+    max-width: 90vw;
+    padding: 8px 16px;
+    gap: 0px;
+  }
+
+  .tool-btn {
+    font-size: 25px;
+    padding: 6px;
+  }
+
+  #show-toolbar {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+  }
+
+  #back-btn {
+    top: 8px;
+    left: 8px
+  }
+
+}
