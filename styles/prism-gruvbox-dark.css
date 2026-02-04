@@ -1,0 +1,159 @@
+/**
+ * Gruvbox dark theme
+ *
+ * Adapted from a theme based on:
+ * Vim Gruvbox dark Theme (https://github.com/morhetz/gruvbox)
+ *
+ * @author Azat S. <to@azat.io>
+ * @version 1.0
+ */
+
+
+:root {
+  --primary: #d8c3ab;
+  --background: #151311;
+  --background-brighter: #282828;
+  --red: #fb4934;
+  --magenta: #d3869b;
+  --green: #8ec07c;
+  --yellow: #fabd2f;
+  --border: #494643;
+  --operators: #928374;
+  --comments: #7c6f64;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--primary);
+  /* fg1 / fg */
+  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  font-size: 1rem;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
+  color: var(--primary);
+  background: var(--background-brighter);
+}
+
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  color: var(--primary);
+  background: var(--background-brighter);
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding-top: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre)>code[class*="language-"],
+pre[class*="language-"] {
+  background: var(--background);
+}
+
+/* Inline code */
+:not(pre)>code[class*="language-"] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: var(--comments);
+}
+
+.token.delimiter,
+.token.boolean,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+  color: var(--red);
+}
+
+.token.operator,
+.token.punctuation,
+.token.attr-name {
+  color: var(--operators);
+}
+
+.token.tag,
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+  color: var(--yellow);
+}
+
+.token.entity,
+.token.number,
+.token.symbol {
+  color: var(--magenta);
+}
+
+.token.property,
+.token.constant,
+.token.variable {
+  color: var(--red);
+}
+
+.token.string,
+.token.char {
+  color: var(--green);
+}
+
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: var(--operators);
+}
+
+.token.url {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.token.function {
+  color: var(--yellow);
+}
+
+.token.regex {
+  background: var(--green);
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.inserted {
+  background: var(--operators);
+}
+
+.token.deleted {
+  background: var(--red);
+}
