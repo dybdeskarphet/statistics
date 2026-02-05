@@ -15,31 +15,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const urlParams = new URLSearchParams(window.location.search);
   const nbPath = urlParams.get("src");
-
   if (nbPath) {
-    fetch(nbPath)
-      .then((response) => {
-        if (!response.ok) throw new Error("HTTP " + response.status);
-        return response.json();
-      })
-      .then((data) => {
+    (async () => {
+      try {
+        const response = await fetch(nbPath);
+
+        if (!response.ok) {
+          throw new Error("HTTP " + response.status);
+        }
+
+        const data = await response.json();
         var notebook = nb.parse(data);
+
         document
           .getElementById("notebook-container")
           .appendChild(notebook.render());
-        // Re-trigger Prism just in case
+
         Prism.highlightAll();
-      })
-      .catch((err) => {
+
+        // Table fixer
+        const table = document.querySelector("table");
+        if (table) {
+          const wrapper = document.createElement("div");
+          wrapper.style.overflowX = "auto";
+          wrapper.style.width = "100%";
+          table.parentNode.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        }
+      } catch (err) {
         console.error(err);
         document.getElementById("notebook-container").innerHTML =
           `<h2 style='color:#fb4934'>Error loading notebook</h2>
-                             <p>${err}</p>
-                             <p>Make sure you are running <code>python3 -m http.server</code> and the file path is correct.</p>`;
-      });
+         <p>${err}</p>
+         <p>Make sure you are running <code>python3 -m http.server</code> and the file path is correct.</p>`;
+      }
+    })();
   } else {
     document.getElementById("notebook-container").innerHTML =
       `<h2 style='color:#fabd2f'>Ready</h2>
-                     <p>Use <code>?src=path/to/notebook.ipynb</code> in the URL.</p>`;
+     <p>Use <code>?src=path/to/notebook.ipynb</code> in the URL.</p>`;
   }
 });

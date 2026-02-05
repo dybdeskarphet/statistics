@@ -5,6 +5,7 @@
   --h2: #8ec07c;
   --h3: #fabd2f;
   --border: #494643;
+  --background-brighter: #282828;
 }
 
 #back-btn {
@@ -27,7 +28,7 @@
 body {
   background-color: var(--background);
   /* Gruvbox Dark Hard */
-  color: #aacccc;
+  color: var(--primary);
   margin: 0;
   padding: 40px;
   display: flex;
@@ -80,4 +81,54 @@ a:hover {
   width: 100%;
   max-width: 900px;
   background-color: var(--background);
+}
+
+table {
+  max-width: 70%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Header styling */
+th {
+  color: var(--h3);
+  font-weight: bold;
+  border-bottom: 2px solid var(--border);
+}
+
+/* Cell styling */
+td {
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+}
+
+/* Hover effect */
+tr:hover td {
+  background-color: var(--background-brighter);
+}
+
+/* Remove border from the very last row */
+tr:last-child td {
+  border-bottom: none;
+}
+
+#notebook-container img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  table {
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    display: block;
+    overflow-x: scroll;
+  }
 }

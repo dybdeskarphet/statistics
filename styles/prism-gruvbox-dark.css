@@ -63,14 +63,14 @@ code[class*="language-"] ::selection {
 
 /* Code blocks */
 pre[class*="language-"] {
-  padding-top: 1em;
+  padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
 }
 
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
-  background: var(--background);
+  background: var(--background-brighter);
 }
 
 /* Inline code */
