@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const imageName = imageSrc.split("/").pop();
-  document.title = `Viewer - ${imageName}`;
+  document.title = `Document Viewer - ${imageName}`;
 
   var viewer = OpenSeadragon({
     id: "openseadragon1",

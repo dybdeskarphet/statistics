@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const urlParams = new URLSearchParams(window.location.search);
   const nbPath = urlParams.get("src");
+  document.title = `Notebook Viewer - ${nbPath.split("/").pop()}`;
   if (nbPath) {
     (async () => {
       try {
