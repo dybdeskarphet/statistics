@@ -27,7 +27,7 @@ pre[class*="language-"] {
   color: var(--primary);
   /* fg1 / fg */
   font-family: Consolas, Monaco, "Andale Mono", monospace;
-  font-size: 1rem;
+  font-size: 0.9rem;
   direction: ltr;
   text-align: left;
   white-space: pre;

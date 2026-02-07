@@ -5,27 +5,42 @@
   --h2: #8ec07c;
   --h3: #fabd2f;
   --border: #494643;
+  --background-brighter: #282828;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+  border: 2px solid var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }
 
 body {
   background-color: var(--background);
   color: var(--primary);
   font-size: 1.2rem;
-  /* Switch to rem for better consistency */
   margin: 0;
-
-  /* ADD THIS to center everything easily */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .toc {
-  /* Delete all the position: absolute stuff */
   width: 90%;
-  /* prevent it from touching edges on mobile */
   max-width: 600px;
-  /* cap it for desktop */
   margin-top: 2rem;
 }
 
@@ -55,7 +70,6 @@ ul {
 li {
   position: relative;
   padding-left: 0.5rem;
-  /* Space for the line */
   line-height: 2rem;
 }
 

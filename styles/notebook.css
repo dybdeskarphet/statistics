@@ -8,6 +8,26 @@
   --background-brighter: #282828;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-brighter);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+  border: 2px solid var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
 #back-btn {
   position: absolute;
   top: 20px;
@@ -33,6 +53,24 @@ body {
   padding: 40px;
   display: flex;
   justify-content: center;
+}
+
+.nb-cell.nb-markdown-cell p,
+.nb-cell.nb-markdown-cell li,
+.nb-cell.nb-markdown-cell code,
+.nb-output {
+  font-size: 1.1rem;
+}
+
+.nb-text-output {
+  font-size: 0.9rem;
+}
+
+.nb-cell.nb-markdown-cell code {
+  background-color: var(--background-brighter);
+  color: var(--h3);
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 h1 {

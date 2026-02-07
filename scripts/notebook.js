@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const urlParams = new URLSearchParams(window.location.search);
   const nbPath = urlParams.get("src");
-  document.title = `Notebook Viewer - ${nbPath.split("/").pop()}`;
+  document.title = `Viewer - ${nbPath.split("/").pop()}`;
   if (nbPath) {
     (async () => {
       try {
@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
         Prism.highlightAll();
 
         // Table fixer
-        const table = document.querySelector("table");
-        if (table) {
+        const tables = document.querySelectorAll("table");
+        tables.forEach((table) => {
           const wrapper = document.createElement("div");
           wrapper.style.overflowX = "auto";
           wrapper.style.width = "100%";
           table.parentNode.insertBefore(wrapper, table);
           wrapper.appendChild(table);
-        }
+        });
       } catch (err) {
         console.error(err);
         document.getElementById("notebook-container").innerHTML =
