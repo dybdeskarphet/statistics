@@ -1,59 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-  nb.markdown = function (text) {
-    return marked.parse(text);
-  };
-
-  nb.ansi = function (text, options) {
-    return text;
-  };
-
-  nb.highlighter = function (text, pre, code, lang) {
-    var language = Prism.languages[lang] || Prism.languages.python;
-    pre.className = "language-" + (lang || "python");
-    return Prism.highlight(text, language);
-  };
-
+document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const nbPath = urlParams.get("src");
-  document.title = `Viewer - ${nbPath.split("/").pop()}`;
-  if (nbPath) {
-    (async () => {
-      try {
-        const response = await fetch(nbPath);
 
-        if (!response.ok) {
-          throw new Error("HTTP " + response.status);
-        }
-
-        const data = await response.json();
-        var notebook = nb.parse(data);
-
-        document
-          .getElementById("notebook-container")
-          .appendChild(notebook.render());
-
-        Prism.highlightAll();
-
-        // Table fixer
-        const tables = document.querySelectorAll("table");
-        tables.forEach((table) => {
-          const wrapper = document.createElement("div");
-          wrapper.style.overflowX = "auto";
-          wrapper.style.width = "100%";
-          table.parentNode.insertBefore(wrapper, table);
-          wrapper.appendChild(table);
-        });
-      } catch (err) {
-        console.error(err);
-        document.getElementById("notebook-container").innerHTML =
-          `<h2 style='color:#fb4934'>Error loading notebook</h2>
-         <p>${err}</p>
-         <p>Make sure you are running <code>python3 -m http.server</code> and the file path is correct.</p>`;
-      }
-    })();
-  } else {
+  if (!nbPath) {
     document.getElementById("notebook-container").innerHTML =
-      `<h2 style='color:#fabd2f'>Ready</h2>
-     <p>Use <code>?src=path/to/notebook.ipynb</code> in the URL.</p>`;
+      `<h2 style='color:#fabd2f'>Ready</h2><p>Use <code>?src=path/to/notebook.ipynb</code> in the URL.</p>`;
+    return;
+  }
+
+  document.title = `Viewer - ${nbPath.split("/").pop()}`;
+  nb.markdown = (text) => marked.parse(text);
+
+  try {
+    const response = await fetch(nbPath);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const notebook = nb.parse(await response.json());
+    const container = document.getElementById("notebook-container");
+    container.appendChild(notebook.render());
+
+    // Single pass to wrap tables and tag code blocks for Prism
+    container.querySelectorAll("pre, table").forEach((el) => {
+      if (el.tagName === "TABLE") {
+        const wrapper = document.createElement("div");
+        Object.assign(wrapper.style, { overflowX: "auto", width: "100%" });
+        el.replaceWith(wrapper);
+        wrapper.appendChild(el);
+      } else if (!el.className.includes("language-")) {
+        el.classList.add("language-python");
+      }
+    });
+
+    Prism.highlightAll();
+
+    // Trigger MathJax to process the new content
+    if (window.MathJax) {
+      // MathJax 3.x / 4.x
+      window.MathJax.typesetPromise ? window.MathJax.typesetPromise([container]) : window.MathJax.typeset();
+    }
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("notebook-container").innerHTML =
+      `<h2 style='color:#fb4934'>Error loading notebook</h2><p>${err.message || err}</p>`;
   }
 });

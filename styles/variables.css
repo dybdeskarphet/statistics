@@ -1,0 +1,20 @@
+:root {
+  --primary: #d8c3ab;
+  --background: #151311;
+  --background-brighter: #282828;
+  --border: #494643;
+
+  /* Palette */
+  --red: #fb4934;
+  --green: #8ec07c;
+  --yellow: #fabd2f;
+  --magenta: #d3869b;
+
+  /* Semantic Mappings */
+  --h1: var(--red);
+  --h2: var(--green);
+  --h3: var(--yellow);
+  
+  --operators: #928374;
+  --comments: #7c6f64;
+}

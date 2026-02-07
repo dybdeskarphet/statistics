@@ -5,17 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Viewer</title>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
   <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
   <link rel="stylesheet" href="/styles/viewer.css">
 </head>
 
 <body>
+  <div id="openseadragon1"></div>
 
   <a href="/index.html" id="back-btn"><i class="ri-arrow-left-line"></i></a>
 
-  <div id="openseadragon1"></div>
-
+  <!-- UI Elements -->
   <button id="show-toolbar" title="Show Menu">
     <i class="ri-menu-line"></i>
   </button>
@@ -30,8 +31,10 @@
     <button id="hide-toolbar" class="tool-btn" title="Hide Menu"><i class="ri-close-line"></i></button>
   </div>
 
+  <!-- Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"></script>
 
+  <!-- Main Script -->
   <script src="/scripts/viewer.js"></script>
 </body>
 

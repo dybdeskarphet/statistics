@@ -8,19 +8,7 @@
  * @version 1.0
  */
 
-
-:root {
-  --primary: #d8c3ab;
-  --background: #151311;
-  --background-brighter: #282828;
-  --red: #fb4934;
-  --magenta: #d3869b;
-  --green: #8ec07c;
-  --yellow: #fabd2f;
-  --border: #494643;
-  --operators: #928374;
-  --comments: #7c6f64;
-}
+@import "variables.css";
 
 code[class*="language-"],
 pre[class*="language-"] {

@@ -1,95 +1,67 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const imageSrc = urlParams.get("src");
 
-  if (!imageSrc) {
-    console.error("No image specified. Use ?src=filename.jpg");
-    return;
-  }
+  if (!imageSrc)
+    return console.error("No image specified. Use ?src=filename.jpg");
 
-  const imageName = imageSrc.split("/").pop();
-  document.title = `Document Viewer - ${imageName}`;
+  document.title = `Document Viewer - ${imageSrc.split("/").pop()}`;
 
-  var viewer = OpenSeadragon({
+  const viewer = OpenSeadragon({
     id: "openseadragon1",
     prefixUrl: "",
     showNavigationControl: false,
-    tileSources: {
-      type: "image",
-      url: imageSrc,
-    },
+    tileSources: { type: "image", url: imageSrc },
     animationTime: 0.4,
     zoomPerScroll: 1.4,
   });
 
-  function resetToCustomHome() {
-    // Safety check: make sure an item exists before calculating
+  const resetHome = () => {
     if (viewer.world.getItemCount() === 0) return;
+    const item = viewer.world.getItemAt(0);
+    const zoom = viewer.viewport.imageToViewportZoom(
+      viewer.viewport.getContainerSize().x / item.getContentSize().x,
+    );
+    viewer.viewport.zoomTo(zoom, new OpenSeadragon.Point(0.5, 0), true);
+  };
 
-    var zoomLevel =
-      viewer.viewport.getContainerSize().x /
-      viewer.world.getItemAt(0).getContentSize().x;
+  viewer.addHandler("open", resetHome);
 
-    zoomLevel = viewer.viewport.imageToViewportZoom(zoomLevel);
+  const actions = {
+    "zoom-in": () => {
+      viewer.viewport.zoomBy(1.2);
+      viewer.viewport.applyConstraints();
+    },
+    "zoom-out": () => {
+      viewer.viewport.zoomBy(0.8);
+      viewer.viewport.applyConstraints();
+    },
+    home: resetHome,
+    rotate: () =>
+      viewer.viewport.setRotation(viewer.viewport.getRotation() + 90),
+    "full-page": () => viewer.setFullScreen(!viewer.isFullScreen()),
+    download: () => {
+      const link = document.createElement("a");
+      link.href = imageSrc;
+      link.download = imageSrc.split("/").pop();
+      link.click();
+    },
+  };
 
-    // Zoom to the calculated level, centered at top-middle (0.5, 0)
-    viewer.viewport.zoomTo(zoomLevel, new OpenSeadragon.Point(0.5, 0), true);
-  }
-
-  viewer.addHandler("open", resetToCustomHome);
-
-  function bindAction(id, action) {
-    const btn = document.getElementById(id);
-    if (btn) btn.onclick = action;
-  }
-
-  bindAction("zoom-in", function () {
-    viewer.viewport.zoomBy(1.2);
-    viewer.viewport.applyConstraints();
-  });
-
-  bindAction("zoom-out", function () {
-    viewer.viewport.zoomBy(0.8);
-    viewer.viewport.applyConstraints();
-  });
-
-  bindAction("home", resetToCustomHome);
-
-  bindAction("rotate", function () {
-    var currentRotation = viewer.viewport.getRotation();
-    viewer.viewport.setRotation(currentRotation + 90);
-  });
-
-  bindAction("full-page", function () {
-    viewer.setFullScreen(!viewer.isFullScreen());
-  });
-
-  bindAction("download", function () {
-    const link = document.createElement("a");
-    link.href = imageSrc;
-    link.download = imageSrc.split("/").pop();
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  Object.entries(actions).forEach(([id, handler]) => {
+    document.getElementById(id)?.addEventListener("click", handler);
   });
 
   const toolbar = document.querySelector(".toolbar");
-  const hideBtn = document.getElementById("hide-toolbar");
   const showBtn = document.getElementById("show-toolbar");
 
-  // Function to hide the big menu and show the small button
-  function hideMenu() {
-    toolbar.classList.add("hidden");
-    showBtn.classList.add("visible");
-  }
+  const toggleMenu = (hide) => {
+    toolbar.classList.toggle("hidden", hide);
+    showBtn.classList.toggle("visible", hide);
+  };
 
-  // Function to show the big menu and hide the small button
-  function showMenu() {
-    toolbar.classList.remove("hidden");
-    showBtn.classList.remove("visible");
-  }
-
-  // Bind clicks
-  if (hideBtn) hideBtn.onclick = hideMenu;
-  if (showBtn) showBtn.onclick = showMenu;
+  document
+    .getElementById("hide-toolbar")
+    ?.addEventListener("click", () => toggleMenu(true));
+  showBtn?.addEventListener("click", () => toggleMenu(false));
 });
