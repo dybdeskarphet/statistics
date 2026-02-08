@@ -58,5 +58,16 @@ a {
 
 a:hover {
   color: var(--primary);
-  background-color: #32302f;
+  background-color: var(--hover);
+
+}
+
+
+blockquote {
+  padding: 0 1rem;
+  color: var(--operators);
+  border-left: 0.25rem solid var(--border);
+  margin-left: 0;
+  margin-right: 0;
+
 }

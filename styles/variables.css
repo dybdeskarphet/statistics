@@ -14,7 +14,8 @@
   --h1: var(--red);
   --h2: var(--green);
   --h3: var(--yellow);
-  
+
   --operators: #928374;
   --comments: #7c6f64;
+  --hover: #32302f;
 }
