@@ -35,8 +35,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Trigger MathJax to process the new content
     if (window.MathJax) {
-      // MathJax 3.x / 4.x
-      window.MathJax.typesetPromise ? window.MathJax.typesetPromise([container]) : window.MathJax.typeset();
+      if (typeof window.MathJax.typesetPromise === "function") {
+        window.MathJax.typesetPromise([container]);
+      } else if (typeof window.MathJax.typeset === "function") {
+        window.MathJax.typeset();
+      }
     }
 
   } catch (err) {
