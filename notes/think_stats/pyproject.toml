@@ -2,17 +2,35 @@
 name = "think-stats"
 version = "0.1.0"
 description = "Add your description here"
-readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-  "empiricaldist>=0.9.0",
   "ipykernel>=7.1.0",
   "ipython>=9.10.0",
+  "jupytext>=1.19.1",
   "lxml>=6.0.2",
   "matplotlib>=3.10.8",
+  "nbconvert>=7.17.0",
   "numpy>=2.4.2",
   "pandas>=3.0.0",
+  "pandas-stubs>=3.0.0.260204",
+  "scipy-stubs>=1.17.0.2",
   "statadict>=1.1.0",
   "statsmodels>=0.14.6",
   "tables>=3.10.2",
 ]
+
+[dependency-groups]
+dev = ["ipykernel>=7.1.0", "pyqt6>=6.10.2"]
+
+[tool.basedpyright]
+exclude = ["**/__pycache__", ".venv"]
+# reportAny = false
+# reportUnknownArgumentType = false
+# reportUnknownLambdaType = false
+# reportUnknownMemberType = false
+# reportUnknownVariableType = false
+reportUnusedCallResult = false
+reportUnusedExpression = false
+reportUnusedVariable = false
+reportArgumentType = false
+typeCheckingMode = "basic"
