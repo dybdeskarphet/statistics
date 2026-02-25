@@ -176,5 +176,5 @@ r"""
 
 At this point, we have a complete set of ways to represent distributions: PMFs, CDFs and PDFs. Now, let's learn how to transform one to another.
 
-<img src="/notes/assets/distribution_framework.png" height="300"/>
+<img src="/notes/think_stats/assets/distribution_framework.png" height="300"/>
 """
