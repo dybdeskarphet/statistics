@@ -1739,7 +1739,6 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "ipykernel" },
     { name = "pyqt6" },
 ]
 
@@ -1761,10 +1760,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [
-    { name = "ipykernel", specifier = ">=7.1.0" },
-    { name = "pyqt6", specifier = ">=6.10.2" },
-]
+dev = [{ name = "pyqt6", specifier = ">=6.10.2" }]
 
 [[package]]
 name = "tinycss2"

@@ -21,7 +21,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "ipykernel>=7.1.0",
     "pyqt6>=6.10.2",
 ]
 

@@ -35,7 +35,7 @@ r"""
 We start with the PDF of the normal distribution. Formula of normal distribution PDF is:
 
 $$
-\frac {1}{\sqrt {2\pi \sigma ^{2}}}}e^{-{\frac {(x-\mu )^{2}}{2\sigma ^{2}}}
+\frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 $$
 
 Let's evaulate range of weights (NSFG birth data) using Normal PDF.
