@@ -144,8 +144,8 @@ for point in sample_birth_weights:
     ax[1].plot(x_vals, kernel, color="gray", alpha=0.5, linestyle="-", linewidth=0.1)
     kde_total += kernel
 
-ax[2].plot(norm_pdf.index, norm_pdf, color="blue", alpha=0.5)
-ax[2].plot(x_vals, kde_total, color="red")
+ax[2].plot(norm_pdf.index, norm_pdf, color="blue", alpha=0.5, label="normal dist")
+ax[2].plot(x_vals, kde_total, color="red", label="kde")
 
 ax[0].set_xlabel("Weight")
 ax[0].set_ylabel(f"1/{n}")
@@ -156,6 +156,7 @@ ax[1].set_title("Second Step - Normal distribution PDFs for each weight")
 ax[2].set_xlabel("Weight (kg)")
 ax[2].set_ylabel("Probability")
 ax[2].set_title("KDE plot of weights")
+ax[2].legend()
 
 
 plt.show()
