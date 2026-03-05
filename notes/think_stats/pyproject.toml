@@ -14,6 +14,7 @@ dependencies = [
   "pandas>=3.0.0",
   "pandas-stubs>=3.0.0.260204",
   "scipy-stubs>=1.17.0.2",
+  "seaborn>=0.13.2",
   "statadict>=1.1.0",
   "statsmodels>=0.14.6",
   "tables>=3.10.2",

@@ -25,8 +25,10 @@ from matplotlib.lines import lineStyles
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.stats import f, trimboth, norm
+from pandas._libs import interval
+from scipy.stats import expon, f, trimboth, norm
 from scipy.integrate import simpson
+import seaborn as sns
 
 # %% [markdown]
 r"""
@@ -178,4 +180,196 @@ r"""
 At this point, we have a complete set of ways to represent distributions: PMFs, CDFs and PDFs. Now, let's learn how to transform one to another.
 
 <img src="/notes/think_stats/assets/distribution_framework.png" height="300"/>
+"""
+
+# %% [markdown]
+r"""
+Let's practice these transformations and representations using the popular "44 babies in one 24-hour period" dataset.
+"""
+
+# %%
+colspecs = [(1, 8), (9, 16), (17, 24), (25, 32)]
+column_names = ["time", "sex", "weight_g", "minutes"]
+boom = pd.read_fwf(
+    "./data/babyboom.dat", colspecs=colspecs, names=column_names, skiprows=59
+)
+boom
+
+# %%
+intervals = boom["minutes"].diff().dropna()
+intervals
+
+# %%
+intervals_pmf = intervals.value_counts(normalize=True).sort_index()
+intervals_pmf
+
+# %%
+fig, ax = plt.subplots()
+ax.bar(intervals_pmf.index, intervals_pmf)
+plt.show()
+
+# %%
+intervals_cdf = intervals_pmf.cumsum()
+intervals_cdf
+
+# %%
+fig, ax = plt.subplots()
+ax.step(intervals_cdf.index, intervals_cdf)
+plt.show()
+
+# %%
+intervals_pmf_from_cdf = intervals_cdf.diff().fillna(intervals_cdf.iloc[0])
+intervals_pmf_from_cdf
+
+# %%
+fig, ax = plt.subplots()
+ax.bar(intervals_pmf_from_cdf.index, intervals_pmf_from_cdf, alpha=0.4)
+ax.bar(intervals_pmf.index, intervals_pmf, alpha=0.4)
+plt.show()
+
+# %% [markdown]
+r"""
+We can use `.allclose()` to check if there are any differences between the first and the second intervals PMF.
+"""
+
+# %%
+np.allclose(intervals_pmf, intervals_pmf_from_cdf)
+
+# %% [markdown]
+r"""
+We converted a PMF to CDF, then CDF to PMF, now let's create a KDE plot using the PMF.
+"""
+
+# %%
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+sns.kdeplot(intervals, ax=ax[0], bw_method="scott")
+ax[1].bar(intervals_pmf.index, intervals_pmf)
+ax[0].set_xlim(-5, 165)
+plt.show()
+
+# %% [markdown]
+r"""
+Let's see how the CDF looks again.
+"""
+
+# %%
+intervals_cdf = intervals_pmf.cumsum()
+intervals_cdf
+
+# %%
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.step(intervals_cdf.index, intervals_cdf)
+plt.show()
+
+# %% [markdown]
+r"""
+It looks exponential CDF.
+"""
+
+# %%
+x_ticks = np.arange(0, np.max(intervals))
+print(x_ticks)
+
+# %%
+params = expon.fit(intervals)
+exp_cdf = pd.Series(
+    expon.cdf(x=x_ticks, loc=intervals.min(), scale=intervals.std()),
+    index=x_ticks,
+)
+exp_cdf
+
+# %%
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.step(exp_cdf.index, exp_cdf, linestyle=":", color="gray")
+ax.step(intervals_cdf.index, intervals_cdf)
+plt.show()
+
+# %% [markdown]
+r"""
+it looks like an exponential cdf, but it doesn't really fit.
+"""
+
+# %% [markdown]
+r"""
+## Exercises
+
+### World cup
+"""
+
+# %%
+x_ticks = np.linspace(0, 1, 1000)
+first_goal = pd.Series(expon.pdf(x=x_ticks, scale=(1 / 2.5)), index=x_ticks)
+first_goal
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(first_goal.index, first_goal)
+ax.set_ylabel("probability")
+ax.set_xlabel("in games (in this case, for 1 game)")
+plt.show()
+
+# %% [markdown]
+r"""
+to calculate the first goal getting scored by the halftime, we can use `simpson` again.
+"""
+
+# %%
+x_halftime = np.linspace(0, 0.5, 1000)
+y_halftime = expon.pdf(x=x_halftime, scale=(1 / 2.5))
+first_goal_halftime_prob = simpson(x=x_halftime, y=y_halftime)
+
+# %% [markdown]
+r"""
+This means that, probability of first goal happening in the first 45 minutes is 71.34. Let's show it in the distribution too.
+"""
+
+# %%
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(first_goal.index, first_goal)
+ax.set_ylabel("probability")
+ax.set_xlabel("in games (in this case, for 1 game)")
+ax.fill_between(
+    x_halftime,
+    y_halftime,
+    alpha=0.3,
+    label=f"{round(first_goal_halftime_prob,3)*100}%",
+)
+ax.legend()
+plt.show()
+
+# %% [markdown]
+r"""
+We can also use a CDF to calculate this.
+"""
+
+# %%
+expon_cdf = pd.Series(expon.cdf(x=x_ticks, scale=(1 / 2.5)), index=x_ticks)
+halfway = expon_cdf.index.get_indexer([0.5], method="nearest")[0]
+
+# %%
+x_ticks = np.linspace(0, 1, 2000)
+first_goal_cdf = pd.Series(expon_cdf, index=expon_cdf.index)
+first_goal_cdf
+
+# %%
+fig, ax = plt.subplots()
+ax.vlines(
+    x=0.5, ymin=0, ymax=expon_cdf.iloc[halfway], linestyle="--", color="lightgray"
+)
+ax.hlines(expon_cdf.iloc[halfway], xmax=0.5, xmin=0, linestyle="--", color="lightgray")
+ax.plot(first_goal_cdf.index, first_goal_cdf)
+ax.set_xlim(0)
+ax.set_ylim(0)
+plt.show()
+# %%
+
+
+# %% [markdown]
+r"""
+## Glossary from the resource
+
+- **continuous:** A quantity is continuous if it can have any value in a range on the number line. Most things we measure in the world – like weight, distance, and time – are continuous.
+- **discrete:** A quantity is discrete if it can have a limited set of values, like integers or categories. Exact counts are discrete, as well as categorical variables.
+- **probability density function (PDF):** A function that shows how density (not probability) is spread across the values of a continuous variable. The area under the PDF within an interval gives the probability that the variable falls in that interval range.
+- **probability density:** The value of a PDF at a specific point; it’s not a probability itself, but it can be used to compute a probability.
+- **kernel density estimation (KDE):** A method for estimating a PDF based on a sample.
+- **discretize:** To approximate a continuous quantity by dividing its range into discrete levels or categories.
 """
