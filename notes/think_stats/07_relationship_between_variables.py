@@ -25,6 +25,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from scipy.stats import spearmanr
 
 # %%
 stud = pd.read_csv("./data/nlsy97-extract.csv.gz").replace([-1, -2, -3, -4, -5], np.nan)
@@ -126,6 +127,7 @@ When NLSY respondents were in 9th grade, many of them took the math section of t
 
 # %%
 stud_valid["piat_math"] = stud_valid["R1318200"]
+stud["piat_math"] = stud["R1318200"]
 stud_piat_sat = stud_valid.dropna(subset=["piat_math"])
 stud_piat_sat.reset_index(inplace=True)
 stud_piat_sat
@@ -225,3 +227,174 @@ This means that, if someone's PIAT Math score is 1 standard deviation above the 
 
 # %%
 print("r =", np.mean(stud_piat_sat["sat_math_norm"] * stud_piat_sat["piat_math_norm"]))
+
+# %% [markdown]
+r"""
+We can also use the relevant `numpy` function to find the correlation.
+"""
+
+# %%
+print("r =", np.corrcoef(stud_piat_sat["piat_math"], stud_piat_sat["sat_math"]))
+
+# %% [markdown]
+r"""
+There are also non-linear correlations too, so we cannot say that there is no correlation if the correlation coefficient is zere. In that case, we may have to investigate further.
+"""
+
+# %% [markdown]
+r"""
+## Rank Correlation
+"""
+
+# %% [markdown]
+r"""
+NLSY dataset also has relatively recent data about the incomes of the respondents.
+"""
+
+# %%
+stud_valid["income"] = stud_valid["U4949700"]
+stud["income"] = stud["U4949700"]
+stud["income"].describe()
+
+# %%
+income_pmf = stud["income"].value_counts(normalize=True).sort_index()
+income_cdf = income_pmf.cumsum()
+
+# %%
+fig, ax = plt.subplots()
+ax.plot(income_cdf.index, income_cdf)
+plt.show()
+
+# %% [markdown]
+r"""
+Let's look at the correlation between SAT Math scores and incomes.
+"""
+
+# %%
+fig, ax = plt.subplots()
+ax.scatter(stud["piat_math"], stud["income"], s=2)
+plt.show()
+
+# %%
+stud["piat_math"].corr(stud["income"])
+
+# %% [markdown]
+r"""
+This is not a strong correlation as the correlation between SAT scores and PIAT scores. But considering the number of factors that affect income, it's still pretty strong.
+"""
+
+# %% [markdown]
+r"""
+Correlation coefficient is affected by outliers a lot, so let's user something better for this scenario.
+"""
+
+# %%
+valid = stud.dropna(subset=["piat_math", "sat_math", "income"])
+
+# %%
+piat_math_rank = valid["piat_math"].rank(method="first")
+income_rank = valid["income"].rank(method="first")
+
+# %%
+fig, ax = plt.subplots()
+ax.scatter(piat_math_rank, income_rank, s=1, alpha=0.6)
+plt.show()
+
+# %%
+np.corrcoef(piat_math_rank, income_rank)
+
+# %% [markdown]
+r"""
+It's still not a very strong correlation, but it is better than using correlation coefficient on its own, since we have a lot of outilers. We can use `scipy`'s `spearmanr` method, which does the same.
+"""
+
+# %%
+spearmanr(valid["income"], valid["piat_math"]).statistic
+
+# %% [markdown]
+r"""
+Let's do the same with SAT scores too.
+"""
+
+# %%
+valid["sat_math"].corr(valid["income"])
+
+# %%
+fig, ax = plt.subplots()
+ax.scatter(valid["sat_math"], valid["income"], s=3)
+plt.show()
+
+# %%
+spearmanr(valid["sat_math"], valid["income"]).statistic
+
+# %% [markdown]
+r"""
+It's still not a strong correlation, but strong considering the income factors.
+"""
+
+# %% [markdown]
+r"""
+## Correlation and Causation
+
+[Correlation does not imply causation](https://en.wikipedia.org/wiki/Correlation_does_not_imply_causation). Identifying and measuring causal relationships is the topic of a branch of statistics called causal inference.
+"""
+
+# %% [markdown]
+r"""
+## Exercises
+
+Let's investigate the relationship between degrees and income.
+"""
+
+# %%
+stud["degree"] = stud["Z9083900"]
+deginc = stud.dropna(subset=["degree", "income"])
+
+# %%
+deginc_grouped = deginc.groupby("degree")
+deginc_grouped
+
+# %%
+deginc_grouped_medians = deginc_grouped.quantile(0.5)
+deginc_grouped_medians["income"]
+
+# %%
+fig, ax = plt.subplots()
+ax.plot(deginc_grouped_medians["income"].index, deginc_grouped_medians["income"])
+ax.set_xticks(
+    ticks=deginc_grouped_medians["income"].index,
+    labels=[
+        "None",
+        "GED",
+        "High school diploma",
+        "Associate's degree",
+        "Bachelor's degree",
+        "Master's degree",
+        "PhD",
+        "Professional degree",
+    ],
+    ha="right",
+    rotation=30,
+)
+plt.tight_layout()
+plt.show()
+
+# %% [markdown]
+r"""
+## Glossary from the resource 
+
+- **scatter plot:** A visualization that shows the relationship between two variables by plotting one point for each observation in the dataset.
+- **overplotted:** A scatter plot is overplotted if many markers overlap, making it hard to distinguish areas of different density, which can misrepresent the relationship.
+- **jitter:** Random noise added to data points in a plot to make overlapping values more visible.
+- **decile plot:** A plot that divides data into deciles (ten groups) based on one variable, then summarizes another variable for each group.
+- **decile:** One of the groups created by sorting data and dividing it into ten roughly equal parts.
+- **Pearson correlation coefficient:** A statistic that measures the strength and sign (positive or negative) of the linear relationship between two variables.
+- **standard score:** A quantity that has been standardized so that it is expressed in standard deviations from the mean.
+- **correlation matrix:** A table showing the correlation coefficients for each pair of variables in a dataset.
+- **rank correlation:** A robust way to quantify the strength of a relationship by using the ranks of values instead of the actual values.
+- **randomized controlled trial:** An experiment where subjects are randomly assigned to groups that receive different treatments.
+- **treatment group:** In an experiment, the group that receives the intervention being tested.
+- **control group:** In an experiment, the group that does not receive the intervention, or receives a treatment whose effect is known.
+- **natural experiment:** An experiment that uses naturally occurring groups, which can sometimes mimic random assignment.
+- **causal inference:** Methods for identifying and quantifying cause-and-effect relationships.
+"""
