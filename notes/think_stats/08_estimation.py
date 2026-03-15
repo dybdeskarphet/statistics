@@ -22,7 +22,14 @@ r"""
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from scipy.stats import mode
+from scipy.constants import pound
+
+# %% [markdown]
+r"""
+Weighing Penguins
+"""
 
 # %%
 sample = pd.Series(np.random.normal(0, 1, size=5000))
@@ -141,4 +148,89 @@ So comparing the mean and the median, which one would be closer to the answer we
 # %% [markdown]
 r"""
 So what does this have to do with estimation? Nothing. I just wanted to make it clearer that the fact we can obtain the same result using both the mean and the median above is a property of the normal distribution. Let's keep going with the estmiation.
+"""
+
+# %% [markdown]
+r"""
+Let's check out means and medians first.
+"""
+
+# %%
+means[:5], medians[:5]
+
+# %% [markdown]
+r"""
+We are sure that both mean and the median is a great estimators, but let's take a look at the RMSE (Root Mean Sqaure Error) of both estimates.
+"""
+
+
+# %%
+def mse(estimates, actual):
+    errors = np.asarray(estimates) - actual
+    return np.mean(errors**2)
+
+
+# %%
+means_rmse = np.sqrt(mse(means, mu))
+medians_rmse = np.sqrt(mse(medians, mu))
+means_rmse, medians_rmse
+
+# %% [markdown]
+r"""
+It looks like the RMSE of means is lower, which means the deviation of the sample means is lower compared to deviation of the sample medians.
+"""
+
+# %% [markdown]
+r"""
+## Robustness
+
+The `mu` and the `sigma` we use here are from an imaginary penguin weight dataset.
+
+If we expand on the scenario, we take the penguins, weigh them, and record their weights. However, let’s say that 2% of the penguins accidentally pressed the “unit” button, and some of them were measured in kilograms instead of pounds.
+"""
+
+
+# %%
+def make_normal_sample_with_errors(mu, sigma, n):
+    sample = np.random.normal(mu, sigma, n)
+    factor = np.random.choice([1, 1 / pound], p=[0.98, 0.02], size=n)
+    return factor * sample
+
+
+# %%
+sample = make_normal_sample_with_errors(mu, sigma, 5000)
+sample_pdf = pd.Series(sample).value_counts(normalize=True)
+
+# %%
+fig, ax = plt.subplots()
+ax.hist(sample, bins=40, density=True, alpha=0.8)
+sns.kdeplot(sample, ax=ax, color="red")
+plt.show()
+
+# %% [markdown]
+r"""
+As we can see, the outliers are causing the plot to extend to the right. Let's see which estimator is unbiased with the faulty dataset.
+"""
+
+# %%
+ns = np.logspace(1, 5).astype(int)
+faulty_means = [np.mean(make_normal_sample_with_errors(mu, sigma, n)) for n in ns]
+faulty_medians = [np.median(make_normal_sample_with_errors(mu, sigma, n)) for n in ns]
+
+# %%
+fig, axes = plt.subplots(1, 2, figsize=(12, 3))
+axes[0].plot(ns, faulty_means)
+axes[1].plot(ns, faulty_medians)
+axes[0].axhline(mu, linestyle="--", color="red", alpha=0.6)
+axes[1].axhline(mu, linestyle="--", color="red", alpha=0.6)
+axes[0].set_ylabel("Sample Mean")
+axes[0].set_xlabel("Sample Size")
+axes[1].set_ylabel("Sample Median")
+axes[1].set_xlabel("Sample Size")
+plt.tight_layout()
+plt.show()
+
+# %% [markdown]
+r"""
+With the faulty dataset, median is the less biased estimator. That's because, as we've always been saying, the median is much more robust.
 """
