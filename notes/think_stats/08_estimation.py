@@ -76,19 +76,19 @@ plt.show()
 
 # %% [markdown]
 r"""
-Right here, we actually visualized how WLLN (Weak Law of Large Numbers) work. We also saw that in a normal distribution, both mean and median are great estimators; because mean, median and the mode is all equal in a normal distribution. Using mean would be better in this case, since it is more efficient.
+Right here, we've visualized the WLLN (Weak Law of Large Numbers) in action. We can also see that in a normal distribution, mean, median and the mode are perfectly equal in a normal distribution. But using the mean is usually preferred here because it is more statistically efficient.
 
-**What is an estimator?:** When we say estimator, we are actually trying to say that best estimator of the population parameter as the sample size goes to infinity, where parameter can be anything you want (SD, mean, median etc.).
+**What is an estimator?** Simply put, an estimator is a rule or formula used to make an educated guess about a population parameter (like the mean, standard deviation, or median) based on sample data. When an estimator gets closer to the true population parameter as the sample size goes to infinity, we specifically call it a consistent estimator.
 """
 
 # %% [markdown]
 r"""
-Before getting in more deeper into other stuff, I just want to clear out that we are using central tendency measures right now. All of them can be useful in appropriate conditions. However, which one is more useful may depend on the answer we’re looking for. Let’s illustrate this with an example from the real world.
+Before diving into deeper topics, I just want to clarify that we are currently focusing on central tendency measures. While all of these are useful under the right conditions, picking the most useful may depend on the question we’re asking. Let’s illustrate this with a real-world example.
 """
 
 # %% [markdown]
 r"""
-If we tried to visualize the histogram of the world wealth, since most of the world works for roughly the same pay, but only a few are wealthy, we would see a right-skewed distribution.
+If we plotted a histogram of global wealth, we would see a right-skewed distribution (Lognormal is our best choice here). This happens because the vast majority of people earn roughly the same average income, while a tiny fraction of the population holds an extreme amount of wealth.
 """
 
 # %%
