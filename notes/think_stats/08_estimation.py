@@ -18,6 +18,11 @@ r"""
 # Estimation
 """
 
+# %% [markdown]
+r"""
+## Weighing Penguins
+"""
+
 # %%
 import numpy as np
 import pandas as pd
@@ -234,3 +239,183 @@ plt.show()
 r"""
 With the faulty dataset, median is the less biased estimator. That's because, as we've always been saying, the median is much more robust.
 """
+
+# %% [markdown]
+r"""
+## Estimating Variance
+
+Suppose we want to estimate the variance in the penguins' weights. But we also have to know that there are two ways of computing the variance, one is biased, and the other one is unbiased. Let's see the difference between them.
+"""
+
+
+# %%
+def biased_var(data):
+    n = len(data)
+    mean = np.mean(data)
+    deviations = data - mean
+    return np.mean(np.sum(deviations**2) / n)
+
+
+# %%
+biased_vars = [biased_var(make_normal_sample(mu, sigma, n=50)) for i in range(1001)]
+np.mean(biased_vars), sigma**2
+
+# %% [markdown]
+r"""
+We know that our population variance is 0.2116, but `biased_vars` consistently gives an underestimation.
+"""
+
+
+# %%
+def unbiased_var(data):
+    n = len(data)
+    mean = np.mean(data)
+    deviations = data - mean
+    return np.mean(np.sum(deviations**2) / (n - 1))
+
+
+unbiased_vars = [unbiased_var(make_normal_sample(mu, sigma, n=50)) for i in range(1001)]
+np.mean(unbiased_vars), sigma**2
+
+# %% [markdown]
+r"""
+`unbiased_vars` gives us a much closer value to population variance. Because compared to the population, the data points are closer together in a sample, and because variance estimates deviation, we consistently overestimate the variance.
+
+That's was the practical reason, there is also a mathematically proven reason which I'm not going to get into here.
+"""
+
+# %% [markdown]
+r"""
+## Sampling Distributions
+
+So far we've been working with simulated data, now, let's see what happens with real data.
+"""
+
+# %%
+peng = (
+    pd.read_csv("./data/penguins_raw.csv")
+    .dropna(subset="Body Mass (g)")
+    .reset_index(drop=True)
+)
+
+# %%
+peng.shape
+peng
+
+# %% [markdown]
+r"""
+For this example, we are only going to use Chinstrap penguins.
+"""
+
+# %%
+chin = peng[peng["Species"] == "Chinstrap penguin (Pygoscelis antarctica)"]
+chin
+
+# %%
+chin["Body Mass (kg)"] = chin["Body Mass (g)"] / 1000
+chin["Body Mass (kg)"]
+
+# %%
+fig, ax = plt.subplots()
+sns.kdeplot(chin["Body Mass (kg)"], ax=ax)
+plt.show()
+
+# %%
+sample = chin["Body Mass (kg)"].sample(35)
+np.mean(sample)
+
+# %% [markdown]
+r"""
+So there are multiple methods which use resampling, we can generally use bootstrapping to estimate the population parameters, we can also use permutation tests for null hypothesis. But in this example, since we know about the population distribution, we are going to cheat and use parametric resampling, which also a form of bootstrapping but with more trust on mathematical model rather than the data.
+"""
+
+
+# %%
+def resample(sample):
+    mean, std = np.mean(sample), np.std(sample)
+    return np.random.normal(mean, std, len(sample))
+
+
+# %%
+sample_means = [np.mean(resample(sample)) for i in range(1001)]
+sample_means[:5]
+
+# %%
+np.mean(chin["Body Mass (kg)"]), np.mean(sample_means)
+
+# %% [markdown]
+r"""
+This is the secnario where we try to estimate the dataset's parameters using a small part of dataset. But what if we wanted to estimate the overall parameters of the Chinstrap penguins at Antarctica, even with the ones that are not in the dataset.
+"""
+
+# %%
+sample_means_overall = [np.mean(resample(chin["Body Mass (kg)"])) for i in range(10000)]
+np.mean(sample_means_overall)
+
+# %% [markdown]
+r"""
+Not surprisingly, we are going to see a normal distribution for the distribution of the means.
+"""
+
+# %%
+fig, ax = plt.subplots()
+sample_means_overall_df = pd.Series(sample_means_overall)
+ax.hist(sample_means_overall_df, bins=50, alpha=0.6, edgecolor="black", density=True)
+sns.kdeplot(sample_means_overall, ax=ax, color="red", alpha=0.8)
+ax.set_xlim(3.51)
+plt.show()
+
+# %% [markdown]
+r"""
+## Standard Error
+
+We know that standard deviation measures the spread, but to use the correct terminology, standard deviation of the sample means is called _standard error_. Let's compute that.
+"""
+
+# %%
+print("Std. Err.", np.std(sample_means_overall))
+
+# %% [markdown]
+r"""
+Which translates to, "if we collect many samples, we expect sample means to vary by about the above value, on average."
+"""
+
+# %% [markdown]
+r"""
+## Confidence Intervals
+
+Another way of summarizing sampling distributions is to compute a confidence interval. For example, 90% confidence interval contains 90% of the values in the sampling distribution.
+"""
+
+# %%
+np.percentile(sample_means_overall, [5, 95])
+
+# %% [markdown]
+r"""
+## Exercies
+
+Let's find the sampling distribution of the standard deviation for Chinstrap penguins
+"""
+
+# %%
+chin
+
+
+# %%
+def bootstrap(sample):
+    return np.random.choice(sample, len(sample), replace=True)
+
+
+# %%
+chin_std_distribution = [
+    np.std(bootstrap(chin["Body Mass (kg)"]), ddof=1) for _ in range(10000)
+]
+chin_std_distribution
+
+# %%
+fig, ax = plt.subplots()
+ax.hist(chin_std_distribution, bins=60)
+plt.show()
+
+# %%
+np.mean(chin_std_distribution), np.std(chin["Body Mass (kg)"], ddof=1)
