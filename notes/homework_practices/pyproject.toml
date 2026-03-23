@@ -1,0 +1,32 @@
+[project]
+name = "homework-practices"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "ipykernel>=7.2.0",
+  "ipython>=9.11.0",
+  "jupyter-client>=8.8.0",
+  "jupytext>=1.19.1",
+  "matplotlib>=3.10.8",
+  "nbconvert>=7.17.0",
+  "numpy>=2.4.3",
+  "pandas>=3.0.1",
+  "pandas-stubs>=3.0.0.260204",
+  "pyqt6>=6.10.2",
+  "seaborn>=0.13.2",
+]
+
+[tool.basedpyright]
+exclude = ["**/__pycache__", ".venv"]
+# reportAny = false
+# reportUnknownArgumentType = false
+# reportUnknownLambdaType = false
+# reportUnknownMemberType = false
+# reportUnknownVariableType = false
+reportUnusedCallResult = false
+reportUnusedExpression = false
+reportUnusedVariable = false
+reportArgumentType = false
+typeCheckingMode = "basic"
