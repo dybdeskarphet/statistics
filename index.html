@@ -1,131 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Science and Statistics</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="/styles/index.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Science and Statistics</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-  <link rel="stylesheet" href="/styles/index.css">
+    <script>
+      window.MathJax = {
+        options: { enableMenu: false },
+      };
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
 
-  <script>
-    window.MathJax = {
-      options: {enableMenu: false}
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
+  <body>
+    <div class="toc">
+      <div style="font-size: 2rem">
+        \begin{gathered} \Omega\text{ }\mathcal{A} \\ \mathbb{P} \end{gathered}
+      </div>
 
-<body>
-  <div class="toc">
-    <div style="font-size: 2rem;">
-      \begin{gathered}
-      \Omega\text{ }\mathcal{A} \\
-      \mathbb{P}
-      \end{gathered}
+      <h1>Notes and Practices from Think Stats</h1>
+      <ul data-base="/notes/think_stats/" data-type="notebook">
+        <li>
+          <a href="01_exploratory_data_analysis.ipynb"
+            >Exploratory Data Analysis</a
+          >
+        </li>
+        <li><a href="02_distributions.ipynb">Distributions</a></li>
+        <li><a href="03_pmf.ipynb">PMF (Probability Mass Functions)</a></li>
+        <li>
+          <a href="04_cdf.ipynb">CDF (Cumulative Distribution Functions)</a>
+        </li>
+        <li>
+          <a href="05_modeling_distributions.ipynb">Modeling Distributions</a>
+        </li>
+        <li>
+          <a href="06_probability_density_functions.ipynb"
+            >PDF (Probability Density Functions)</a
+          >
+        </li>
+        <li>
+          <a href="07_relationship_between_variables.ipynb"
+            >Relationship between variables</a
+          >
+        </li>
+        <li><a href="08_estimation.ipynb">Estimation</a></li>
+      </ul>
+
+      <h1>Notes from Jem N. Corcoran Lectures</h1>
+      <ul data-base="/notes/jem_n_corcoran/" data-type="viewer">
+        <li>
+          <a href="01_lecture.jpg"
+            >Lecture 1 (RVs, PDFs, CDFs, Indicator Notation)</a
+          >
+        </li>
+        <li><a href="02_lecture.jpg">Lecture 2 (EV, Joint PDFs)</a></li>
+        <li>
+          <a href="03_lecture.jpg"
+            >Lecture 3 (Joint PDFs, Integration Tricks)</a
+          >
+        </li>
+      </ul>
+
+      <h1>Notes and Practices from Practical Statistics for Data Scientists</h1>
+      <ul>
+        <li
+          data-base="/notes/practical_statistics_for_data_scientists/"
+          data-type="viewer"
+        >
+          <a href="01_exploratory_data_analysis.jpg"
+            >Exploratory Data Analysis</a
+          >
+          <ul
+            data-base="/notes/practical_statistics_for_data_scientists/01_exploratory_data_analysis/"
+            data-type="notebook"
+          >
+            <li>
+              <a href="01_location_estimates.ipynb">Location Estimates</a>
+            </li>
+            <li>
+              <a href="02_variability_estimates.ipynb">Variability Estimates</a>
+            </li>
+            <li>
+              <a href="03_exploring_data_distribution.ipynb"
+                >Exploring Data Distribution</a
+              >
+            </li>
+            <li>
+              <a href="04_exploring_binary_and_categorical_data.ipynb"
+                >Exploring Binary and Categorical Data</a
+              >
+            </li>
+            <li><a href="05_correlation.ipynb">Correlation</a></li>
+            <li>
+              <a href="06_exploring_two_or_more_variables.ipynb"
+                >Exploring Two or More Variables</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li
+          data-base="/notes/practical_statistics_for_data_scientists/"
+          data-type="viewer"
+        >
+          <a href="02_data_and_sampling_distributions.jpg"
+            >Data and Sampling Distributions</a
+          >
+          <ul
+            data-base="/notes/practical_statistics_for_data_scientists/02_data_and_sampling_distributions/"
+            data-type="notebook"
+          >
+            <li>
+              <a href="01_sampling_distribution_of_statistic.ipynb"
+                >Sampling Distribution of Statistic</a
+              >
+            </li>
+            <li><a href="02_bootstrap.ipynb">Bootstrap</a></li>
+            <li>
+              <a href="03_normal_distribution.ipynb">Normal Distribution</a>
+            </li>
+            <li>
+              <a href="04_long_tailed_distributions.ipynb"
+                >Long Tailed Distributions</a
+              >
+            </li>
+            <li>
+              <a href="05_binomial_distribution.ipynb">Binomial Distribution</a>
+            </li>
+            <li>
+              <a href="06_chi_square_distribution.ipynb"
+                >Chi-Square Distribution</a
+              >
+            </li>
+            <li>
+              <a href="07_poisson_distributions.ipynb">Poisson Distribution</a>
+            </li>
+          </ul>
+        </li>
+
+        <li
+          data-base="/notes/practical_statistics_for_data_scientists/"
+          data-type="viewer"
+        >
+          <a href="03_statistical_experiments_and_significance_testing.jpg"
+            >Statistical Experiments and Significance Testing</a
+          >
+          <ul
+            data-base="/notes/practical_statistics_for_data_scientists/03_statistical_experiments_and_significance_testing/"
+            data-type="notebook"
+          >
+            <li><a href="01_permutation_test.ipynb">Permutation Test</a></li>
+            <li><a href="02_ab_testing.ipynb">A/B Testing</a></li>
+            <li><a href="03_t_test.ipynb">T-test</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
 
-    <h1>Notes and Practices from Think Stats</h1>
-    <ul data-base="/notes/think_stats/" data-type="notebook">
-      <li><a href="01_exploratory_data_analysis.ipynb">Exploratory Data Analysis</a></li>
-      <li><a href="02_distributions.ipynb">Distributions</a></li>
-      <li><a href="03_pmf.ipynb">PMF (Probability Mass Functions)</a></li>
-      <li><a href="04_cdf.ipynb">CDF (Cumulative Distribution Functions)</a></li>
-      <li><a href="05_modeling_distributions.ipynb">Modeling Distributions</a></li>
-      <li><a href="06_probability_density_functions.ipynb">PDF (Probability Density Functions)</a></li>
-      <li><a href="07_relationship_between_variables.ipynb">Relationship between variables</a></li>
-      <li><a href="08_estimation.ipynb">Estimation</a></li>
-    </ul>
+    <script>
+      document.querySelectorAll("[data-base]").forEach((container) => {
+        const base = container.dataset.base;
+        const type =
+          container.dataset.type === "notebook"
+            ? "/notebook.html?src="
+            : "/viewer.html?src=";
 
-    <h1>Class Notes</h1>
-    <ul data-base="/notes/class_notes/" data-type="viewer">
-      <li><a href="02_sirali_permutasyon.jpg">Sıralı Permütasyon</a></li>
-      <li><a href="03_tekrarli_permutasyon.jpg">Tekrarlı Permütasyon</a></li>
-      <li><a href="04_yuvarlak_masa_permutasyonu.jpg">Yuvarlak Masa Permütasyonu</a></li>
-      <li><a href="05_kombinasyon.jpg">Kombinasyon</a></li>
-      <li><a href="06_olasilik.jpg">Olasılık</a></li>
-      <li><a href="06_probability.jpg">Probability (All of Statistics)</a></li>
-      <li><a href="07_permutasyonlu_olasilik.jpg">Permütasyonlu Olasılık</a></li>
-      <li><a href="08_kombinasyonlu_olasilik.jpg">Kombinasyonlu Olasılık</a></li>
-      <li><a href="09_elektrik_devreleri.jpg">Elektrik Devreleri</a></li>
-      <li><a href="10_olasilik_sorular.jpg">Olasılık Örnek Soruları</a></li>
-      <li><a href="11_bayes_teoremi.jpg">Bayes Teoremi</a></li>
-      <li><a href="12_rastgele_degisken_istatistik_hesaplar.jpg">Rastgele Değişkenler</a></li>
-      <li><a href="13_e_ve_var_ozellikleri.jpg">E[X] ve Var[X] özellikleri</a></li>
-      <li><a href="14_cdf.jpg">CDF</a></li>
-      <li><a href="15_cdf_ornekler.jpg">CDF Önrek Soruları</a></li>
-      <li><a href="16_moment_ureten_fonksiyon.jpg">Moment Üreten Fonksiyonlar</a></li>
-      <li><a href="17_binom_dagilimi.jpg">Binom Dağılımı</a></li>
-      <li><a href="18_geometrik_dagilim.jpg">Geometrik Dağılım</a></li>
-      <li><a href="19_negatif_binom_dagilimi.jpg">Negatif Binom Dağılımı</a></li>
-      <li><a href="20_poisson_dagilimi.jpg">Poisson Dağılımı</a></li>
-      <li><a href="21_binom_dagilimina_poisson_yaklasimi.jpg">Binom Dağılımına Poisson Yaklaşımı</a></li>
-      <li><a href="22_hipergeometrik_dagilim.jpg">Hipergeometrik Dağılım</a></li>
-      <li><a href="23_clt_and_lln.jpg">Central Limit Theorem and the Law of Large Numbers (Statistics 110 - Harvard)</a>
-      </li>
-    </ul>
+        // If the container is a UL, select LI > A
+        // If the container is an LI, select direct > A
+        const selector =
+          container.tagName === "UL" ? ":scope > li > a" : ":scope > a";
 
-
-    <h1>Notes and Practices from Practical Statistics for Data Scientists</h1>
-    <ul>
-      <!-- Section 1 -->
-      <li data-base="/notes/practical_statistics_for_data_scientists/" data-type="viewer">
-        <a href="01_exploratory_data_analysis.jpg">Exploratory Data Analysis</a>
-        <ul data-base="/notes/practical_statistics_for_data_scientists/01_exploratory_data_analysis/"
-          data-type="notebook">
-          <li><a href="01_location_estimates.ipynb">Location Estimates</a></li>
-          <li><a href="02_variability_estimates.ipynb">Variability Estimates</a></li>
-          <li><a href="03_exploring_data_distribution.ipynb">Exploring Data Distribution</a></li>
-          <li><a href="04_exploring_binary_and_categorical_data.ipynb">Exploring Binary and Categorical Data</a></li>
-          <li><a href="05_correlation.ipynb">Correlation</a></li>
-          <li><a href="06_exploring_two_or_more_variables.ipynb">Exploring Two or More Variables</a></li>
-        </ul>
-      </li>
-
-      <!-- Section 2 -->
-      <li data-base="/notes/practical_statistics_for_data_scientists/" data-type="viewer">
-        <a href="02_data_and_sampling_distributions.jpg">Data and Sampling Distributions</a>
-        <ul data-base="/notes/practical_statistics_for_data_scientists/02_data_and_sampling_distributions/"
-          data-type="notebook">
-          <li><a href="01_sampling_distribution_of_statistic.ipynb">Sampling Distribution of Statistic</a></li>
-          <li><a href="02_bootstrap.ipynb">Bootstrap</a></li>
-          <li><a href="03_normal_distribution.ipynb">Normal Distribution</a></li>
-          <li><a href="04_long_tailed_distributions.ipynb">Long Tailed Distributions</a></li>
-          <li><a href="05_binomial_distribution.ipynb">Binomial Distribution</a></li>
-          <li><a href="06_chi_square_distribution.ipynb">Chi-Square Distribution</a></li>
-          <li><a href="07_poisson_distributions.ipynb">Poisson Distribution</a></li>
-        </ul>
-      </li>
-
-      <!-- Section 3 -->
-      <li data-base="/notes/practical_statistics_for_data_scientists/" data-type="viewer">
-        <a href="03_statistical_experiments_and_significance_testing.jpg">Statistical Experiments and Significance
-          Testing</a>
-        <ul
-          data-base="/notes/practical_statistics_for_data_scientists/03_statistical_experiments_and_significance_testing/"
-          data-type="notebook">
-          <li><a href="01_permutation_test.ipynb">Permutation Test</a></li>
-          <li><a href="02_ab_testing.ipynb">A/B Testing</a></li>
-          <li><a href="03_t_test.ipynb">T-test</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <script>
-    document.querySelectorAll('[data-base]').forEach(container => {
-      const base = container.dataset.base;
-      const type = container.dataset.type === 'notebook' ? '/notebook.html?src=' : '/viewer.html?src=';
-
-      // If the container is a UL, select LI > A
-      // If the container is an LI, select direct > A
-      const selector = container.tagName === 'UL' ? ':scope > li > a' : ':scope > a';
-
-      container.querySelectorAll(selector).forEach(link => {
-        link.href = type + base + link.getAttribute('href');
+        container.querySelectorAll(selector).forEach((link) => {
+          link.href = type + base + link.getAttribute("href");
+        });
       });
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
