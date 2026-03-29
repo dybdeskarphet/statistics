@@ -62,6 +62,9 @@ So for this specific sample/sample size, we want %95 confidence. We are going to
 
 $$
 \frac{(n-1)s^2}{\chi_{a/2, k}^2} \lt \sigma^2 \lt \frac{(n-1)s^2}{\chi_{1-a/2, k}^2} \\
+$$
+
+$$
 \frac{10s^2}{\chi_{0.025, k=10}^2} \lt \sigma^2 \lt \frac{10s^2}{\chi_{0.975, k=10}^2}
 $$
 """
