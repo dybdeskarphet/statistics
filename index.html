@@ -9,7 +9,13 @@
 
     <script>
       window.MathJax = {
-        options: { enableMenu: false },
+        options: { enableMenu: true },
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+        },
       };
     </script>
     <script
@@ -54,11 +60,27 @@
       </ul>
 
       <h1>Homework Notes</h1>
-      <ul data-base="/notes/homework_practices/" data-type="notebook">
+      <ul data-base="/notes/homework_practices/">
         <li>
-          <a href="01_xbar_minus_ybar.ipynb"
-            >How is X-bar - Y-bar normally distributed if X and Y are normally
-            distributed?</a
+          How is $\bar{X} - \bar{Y}$ normally distributed if $X$ and $Y$ are normally
+          distributed?
+          <ul>
+            <li data-type="notebook">
+              <a href="01_xbar_minus_ybar.ipynb"
+                >Seeing that $(\bar{X} - \bar{Y})$ is normally distributed</a
+              >
+            </li>
+            <li data-type="viewer">
+              <a href="01_xbar_minus_ybar.jpg"
+                >Proof of $(\bar{X} - \bar{Y})$ estimators</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="02_what_is_chi_sqaure.ipynb"
+            >From confidence interval derived from $\chi^2$ to bootstrap
+            confidence interval?</a
           >
         </li>
       </ul>
@@ -177,18 +199,17 @@
     <script>
       document.querySelectorAll("[data-base]").forEach((container) => {
         const base = container.dataset.base;
-        const type =
-          container.dataset.type === "notebook"
-            ? "/notebook.html?src="
-            : "/viewer.html?src=";
+        const defaultType = container.dataset.type;
 
-        // If the container is a UL, select LI > A
-        // If the container is an LI, select direct > A
-        const selector =
-          container.tagName === "UL" ? ":scope > li > a" : ":scope > a";
+        container.querySelectorAll("a").forEach((link) => {
+          // Only process links where this container is the closest [data-base] ancestor
+          if (link.closest("[data-base]") !== container) return;
 
-        container.querySelectorAll(selector).forEach((link) => {
-          link.href = type + base + link.getAttribute("href");
+          const type = link.parentElement.dataset.type || defaultType;
+          const prefix =
+            type === "notebook" ? "/notebook.html?src=" : "/viewer.html?src=";
+
+          link.href = prefix + base + link.getAttribute("href");
         });
       });
     </script>
