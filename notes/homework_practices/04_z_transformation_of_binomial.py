@@ -14,7 +14,7 @@
 # ---
 # %% [markdown]
 r"""
-# Is the z-transform of the sampling distribution of the sample mean of a binomial RV normally distributed?
+# Is the z-transform of the sampling distribution of the sample mean of a binomial RV, a standard normal distribution?
 """
 
 # %%
