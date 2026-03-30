@@ -98,7 +98,7 @@ plt.show()
 
 # %% [markdown]
 r"""
----
+### Result
 """
 
 # %%
