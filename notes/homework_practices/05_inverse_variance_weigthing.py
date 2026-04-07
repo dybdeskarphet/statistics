@@ -86,7 +86,7 @@ data_sum
 
 # %% [markdown]
 r"""
-Here we can also see a column called `weights`, it is calculated by taking the reciprocal of variance ($\frac{1}{\sigma}$). We are going to use this weights to calculate the weighted mean, which we expect to yield better results.
+Here we can also see a column called `weights`, it is calculated by taking the reciprocal of variance ($\frac{1}{\sigma^2}$). We are going to use this weights to calculate the weighted mean, which we expect to yield better results.
 """
 
 # %%
