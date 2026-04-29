@@ -55,7 +55,7 @@ plt.show()
 # %%
 samples = []
 for _ in range(20):
-    samples.append(np.random.choice(data, 20))
+    samples.append(np.random.choice(data, 20, replace=False))
 
 samples[:5]
 
