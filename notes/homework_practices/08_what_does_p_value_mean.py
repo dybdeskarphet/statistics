@@ -112,12 +112,92 @@ plt.show()
 r"""
 As we mentioned earlier, we performed a calculation based on the $\pm 5$ interval, that is, we determined how many standard deviations away the values 245 and 255 could be from the mean in a normal distribution with mean $\mu_0$, that is, a sampling distribution of the sample mean assuming the center is $\mu_0$.
 
-Since we have a PDF, if we calculate the area shown in red, we can determine the probability that the value is 245 or less, and the probability that it is 255 or greater. But of what? The population mean.
+Since we have a PDF, if we calculate the area shown in red, we can determine the probability that the value is 245 or less, and the probability that it is 255 or greater.
 
 So, instead of using the formula with the CDF that we used above, if we had calculated the integral of these areas marked in red, we would still have found the P-value, that is, the probability value.
+
+It’s also worth noting that in a two-tailed test, thinking along the lines of “if we found a mean of 245, we might also find 255” can be confusing. As we recall, when performing a two-tailed calculation in a confidence interval, we added and subtracted the product of a certain standard deviation unit (z-score) multiplied by specific values, meaning we accounted for the possibility that the distribution could extend a certain number of standard deviations to the right as well as to the left.
+
+Here, however, we can say we’re doing the opposite: since our mean is $\mu_0$, we’re accounting for the fact that 245 is actually a certain number of standard deviations to the left. In other words, in the expression $\ldots \pm z_c \cdot \frac{sigma}{\sqrt{n}}$, we’re saying that we only have the $-$ part of the $\pm$ operation. In this example problem, we consider that the right-hand side of the expression consists only of the $-5$ part, and we include the $+5$ part ourselves, which is why we arrive at the result 255; however, viewing the situation as “... $\sigma$ standard deviations away” would provide a better logical foundation.
 """
 
 # %%
 p_value_alt = simpson(null_distribution.pdf(x_left_tail), x=x_left_tail)
 p_value_alt += simpson(null_distribution.pdf(x_right_tail), x=x_right_tail)
 p_value_alt, p_value
+
+# %% [markdown]
+r"""
+Okay we found the P-value, what about our $\alpha$, our significance level.
+"""
+
+# %%
+sig_interval = np.linspace(
+    mu_null + norm.ppf(0.025) * (std_err), mu_null + norm.ppf(0.975) * (std_err)
+)
+sig_interval
+
+# %%
+fig, ax = plt.subplots(figsize=(8, 5))
+x = np.linspace(240, 260, 1000)
+ax.plot(x, null_distribution.pdf(x))
+ax.axvline(sample_mean, color="orange", label="sample mean", linestyle="-", alpha=0.5)
+ax.axvline(
+    (mu_null + (mu_null - sample_mean)), color="orange", linestyle="-", alpha=0.5
+)
+
+x_left_tail = np.linspace(240, sample_mean, 100)
+x_right_tail = np.linspace((mu_null + (mu_null - sample_mean)), 260, 100)
+
+rejcet_area_left = np.linspace(240, null_distribution.ppf(0.025))
+rejcet_area_right = np.linspace(null_distribution.ppf(0.975), 260)
+
+ax.fill_between(
+    rejcet_area_left,
+    null_distribution.pdf(rejcet_area_left),
+    alpha=0.5,
+    color="none",
+    edgecolor="red",
+    hatch="//",
+)
+ax.fill_between(
+    rejcet_area_right,
+    null_distribution.pdf(rejcet_area_right),
+    alpha=0.5,
+    color="none",
+    edgecolor="red",
+    hatch="//",
+    label="reject",
+)
+
+ax.fill_between(
+    sig_interval,
+    null_distribution.pdf(sig_interval),
+    edgecolor="green",
+    facecolor="none",
+    alpha=0.5,
+    hatch="//",
+    label="fail to reject",
+)
+
+ax.axvline(
+    null_distribution.ppf(0.025),
+    color="green",
+    alpha=0.4,
+    linestyle="--",
+)
+ax.axvline(
+    null_distribution.ppf(0.975),
+    color="green",
+    alpha=0.4,
+    label="%5 sig. lvl.",
+    linestyle="--",
+)
+
+ax.legend()
+plt.show()
+
+# %% [markdown]
+r"""
+Finally, when we determine that the samples we can obtain with a probability of 5% or higher are not sufficiently extreme, that is, when we set a significance level of 5%, we end up with a distribution like the one shown above.
+"""
