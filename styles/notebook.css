@@ -21,6 +21,32 @@
   color: #fff;
 }
 
+#toggle-code-btn {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  z-index: 1000;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+#toggle-code-btn:hover {
+  color: #fff;
+}
+
+.nb-input {
+  display: none;
+}
+
+body.show-code .nb-input {
+  display: block;
+}
+
 body {
   background-color: var(--background);
   /* Gruvbox Dark Hard */

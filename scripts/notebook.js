@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.title = `Viewer - ${nbPath.split("/").pop()}`;
   nb.markdown = (text) => marked.parse(text);
 
+  const toggleBtn = document.getElementById("toggle-code-btn");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("show-code");
+    });
+  }
+
   try {
     const response = await fetch(nbPath);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
