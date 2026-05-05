@@ -38,7 +38,7 @@ n = 36
 
 # %% [markdown]
 r"""
-You find that sample mean is 245 grams, is it enough to say that factory is lying?
+You find that sample mean is 245 grams, **is it enough to say that factory is lying?**
 """
 
 # %%
@@ -46,7 +46,7 @@ pop_std = 12
 
 # %% [markdown]
 r"""
-Because we know the population standard deviation, we can easily calculate the sampling distribution of the sample mean.
+Because we know the population standard deviation, we can easily calculate the standard deviation of the sampling distribution of the sample mean, namely, *standard error*.
 """
 
 # %%
@@ -115,10 +115,6 @@ As we mentioned earlier, we performed a calculation based on the $\pm 5$ interva
 Since we have a PDF, if we calculate the area shown in red, we can determine the probability that the value is 245 or less, and the probability that it is 255 or greater.
 
 So, instead of using the formula with the CDF that we used above, if we had calculated the integral of these areas marked in red, we would still have found the P-value, that is, the probability value.
-
-It’s also worth noting that in a two-tailed test, thinking along the lines of “if we found a mean of 245, we might also find 255” can be confusing. As we recall, when performing a two-tailed calculation in a confidence interval, we added and subtracted the product of a certain standard deviation unit (z-score) multiplied by specific values, meaning we accounted for the possibility that the distribution could extend a certain number of standard deviations to the right as well as to the left.
-
-Here, however, we can say we’re doing the opposite: since our mean is $\mu_0$, we’re accounting for the fact that 245 is actually a certain number of standard deviations to the left. In other words, in the expression $\ldots \pm z_c \cdot \frac{sigma}{\sqrt{n}}$, we’re saying that we only have the $-$ part of the $\pm$ operation. In this example problem, we consider that the right-hand side of the expression consists only of the $-5$ part, and we include the $+5$ part ourselves, which is why we arrive at the result 255; however, viewing the situation as “... $\sigma$ standard deviations away” would provide a better logical foundation.
 """
 
 # %%
@@ -128,7 +124,9 @@ p_value_alt, p_value
 
 # %% [markdown]
 r"""
-Okay we found the P-value, what about our $\alpha$, our significance level.
+It’s also worth noting that in a two-tailed test, thinking along the lines of “if we found a mean of 245, we might also find 255” can be confusing. As we recall, when performing a two-tailed calculation in a confidence interval, we added and subtracted the product of a certain standard deviation unit (z-score) multiplied by specific values, meaning we accounted for the possibility that the distribution could extend a certain number of standard deviations to the right as well as to the left.
+
+Here, however, we can say we’re doing the opposite: since our mean is $\mu_0$, we’re accounting for the fact that 245 is actually a certain number of standard deviations to the left. In other words, in the expression $\ldots \pm z_c \cdot \frac{\sigma}{\sqrt{n}}$, we’re saying that we only have the $-$ part of the $\pm$ operation. In this example problem, we consider that the right-hand side of the expression consists only of the $-5$ part, and we include the $+5$ part ourselves, which is why we arrive at the result 255; however, viewing the situation as “... $\sigma$ away” would provide a better logical foundation.
 """
 
 # %%
@@ -199,5 +197,5 @@ plt.show()
 
 # %% [markdown]
 r"""
-Finally, when we determine that the samples we can obtain with a probability of 5% or higher are not sufficiently extreme, that is, when we set a significance level of 5%, we end up with a distribution like the one shown above.
+Finally, when we determine that the samples we can obtain with a probability of 5% or higher are not sufficiently extreme, that is, when we set a **significance level of 5%**, we end up with a distribution like the one shown above.
 """
