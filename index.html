@@ -3,253 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Science and Statistics</title>
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
-    <link rel="stylesheet" href="/styles/index.css" />
+    <title>Statistics & Data Science | kavakci.dev</title>
+    <meta
+      name="description"
+      content="Personal notes, practices, and lecture summaries on Statistics and Data Science. Including Think Stats and Practical Statistics."
+    />
+    <meta
+      name="keywords"
+      content="statistics, data science, machine learning, notes, jupyter, think stats"
+    />
+    <meta name="author" content="kavakci.dev" />
+    <link rel="canonical" href="https://statistics.kavakci.dev/" />
 
+    <meta
+      property="og:title"
+      content="Statistics & Data Science | kavakci.dev"
+    />
+    <meta
+      property="og:description"
+      content="Personal data science notes and academic summaries."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://statistics.kavakci.dev/" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Statistics & Data Science" />
+    <meta
+      name="twitter:description"
+      content="Data science practices and lecture notes."
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hack/0.8.1/hack.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hack/0.8.1/dark.css"
+    />
+    <link rel="stylesheet" href="style.css" />
     <script>
       window.MathJax = {
-        options: { enableMenu: true },
         tex: {
           inlineMath: [
             ["$", "$"],
             ["\\(", "\\)"],
           ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
         },
       };
     </script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="index.js" defer></script>
   </head>
 
-  <body>
-    <script src="https://keepandroidopen.org/banner.js?lang=en&size=minimal&animation=off&id=keepandroidopen"></script>
-    <div id="keepandroidopen"></div>
-    <div class="toc">
-      <div style="font-size: 2rem">
-        \begin{gathered} \Omega\text{ }\mathcal{A} \\ \mathbb{P} \end{gathered}
+  <body class="hack dark">
+    <div class="container">
+      <header>
+        <h1>Statistics & Data Science</h1>
+        <p class="lead">Personal notes, practices, and lecture summaries.</p>
+      </header>
+
+      <div id="content-container">
+        <p>Loading content...</p>
       </div>
 
-      <h1>Notes and Practices from Think Stats</h1>
-      <ul data-base="/notes/think_stats/" data-type="notebook">
-        <li>
-          <a href="01_exploratory_data_analysis.ipynb"
-            >Exploratory Data Analysis</a
-          >
-        </li>
-        <li><a href="02_distributions.ipynb">Distributions</a></li>
-        <li><a href="03_pmf.ipynb">PMF (Probability Mass Functions)</a></li>
-        <li>
-          <a href="04_cdf.ipynb">CDF (Cumulative Distribution Functions)</a>
-        </li>
-        <li>
-          <a href="05_modeling_distributions.ipynb">Modeling Distributions</a>
-        </li>
-        <li>
-          <a href="06_probability_density_functions.ipynb"
-            >PDF (Probability Density Functions)</a
-          >
-        </li>
-        <li>
-          <a href="07_relationship_between_variables.ipynb"
-            >Relationship between variables</a
-          >
-        </li>
-        <li><a href="08_estimation.ipynb">Estimation</a></li>
-      </ul>
+      <hr />
 
-      <h1>Personal Practices</h1>
-      <ul data-base="/notes/homework_practices/">
-        <li>
-          How is $\bar{X} - \bar{Y}$ normally distributed if $X$ and $Y$ are
-          normally distributed?
-          <ul>
-            <li data-type="notebook">
-              <a href="01_xbar_minus_ybar.ipynb"
-                ><s
-                  >Seeing that $(\bar{X} - \bar{Y})$ is normally distributed</u
-                ></s></a
-              >
-            </li>
-            <li data-type="viewer">
-              <a href="01_xbar_minus_ybar.jpg"
-                >Proof of $(\bar{X} - \bar{Y})$ estimators</a
-              >
-            </li>
-          </ul>
-        </li>
-        <li data-type="notebook">
-          <a href="02_what_is_chi_sqaure.ipynb"
-            >From confidence interval derived from $\chi^2$ to bootstrap
-            confidence interval</a
-          >
-        </li>
-        <li data-type="notebook">
-          <a href="04_z_transformation_of_binomial.ipynb"
-            >Is the z-transform of the sampling distribution of the sample mean
-            of a binomial RV, a standard normal distribution?</a
-          >
-        </li>
-        <li data-type="notebook">
-          <a href="05_inverse_variance_weigthing.ipynb"
-            >When is inverse-variance weighting useful?</a
-          >
-        </li>
-        <li>
-          What are moment generating functions (MGFs)?
-          <ul>
-            <li data-type="viewer">
-              <a href="07_power_series.jpg">Power series</a>
-            </li>
-            <li data-type="viewer">
-              <a href="07_gen_func.jpg">Generating functions</a>
-            </li>
-            <li data-type="viewer">
-              <a href="07_mgfs.jpg">Moment generating functions</a>
-            </li>
-          </ul>
-        </li>
-        <li data-type="notebook">
-          <a href="08_what_does_p_value_mean.ipynb">What is the p-value?</a>
-        </li>
-        <li data-type="viewer">
-          <a href="10_mse.jpg">What is MSE?</a>
-        </li>
-        <li data-type="viewer">
-          <a href="11_mle.jpg">What is MLE?</a>
-        </li>
-      </ul>
-
-      <h1>Notes from Jem N. Corcoran Lectures</h1>
-      <ul data-base="/notes/jem_n_corcoran/" data-type="viewer">
-        <li>
-          <a href="01_lecture.jpg"
-            >Lecture 1 (RVs, PDFs, CDFs, Indicator Notation)</a
-          >
-        </li>
-        <li><a href="02_lecture.jpg">Lecture 2 (EV, Joint PDFs)</a></li>
-        <li>
-          <a href="03_lecture.jpg"
-            >Lecture 3 (Joint PDFs, Integration Tricks)</a
-          >
-        </li>
-      </ul>
-
-      <h1>Notes and Practices from Practical Statistics for Data Scientists</h1>
-      <ul>
-        <li
-          data-base="/notes/practical_statistics_for_data_scientists/"
-          data-type="viewer"
-        >
-          <a href="01_exploratory_data_analysis.jpg"
-            >Exploratory Data Analysis</a
-          >
-          <ul
-            data-base="/notes/practical_statistics_for_data_scientists/01_exploratory_data_analysis/"
-            data-type="notebook"
-          >
-            <li>
-              <a href="01_location_estimates.ipynb">Location Estimates</a>
-            </li>
-            <li>
-              <a href="02_variability_estimates.ipynb">Variability Estimates</a>
-            </li>
-            <li>
-              <a href="03_exploring_data_distribution.ipynb"
-                >Exploring Data Distribution</a
-              >
-            </li>
-            <li>
-              <a href="04_exploring_binary_and_categorical_data.ipynb"
-                >Exploring Binary and Categorical Data</a
-              >
-            </li>
-            <li><a href="05_correlation.ipynb">Correlation</a></li>
-            <li>
-              <a href="06_exploring_two_or_more_variables.ipynb"
-                >Exploring Two or More Variables</a
-              >
-            </li>
-          </ul>
-        </li>
-
-        <li
-          data-base="/notes/practical_statistics_for_data_scientists/"
-          data-type="viewer"
-        >
-          <a href="02_data_and_sampling_distributions.jpg"
-            >Data and Sampling Distributions</a
-          >
-          <ul
-            data-base="/notes/practical_statistics_for_data_scientists/02_data_and_sampling_distributions/"
-            data-type="notebook"
-          >
-            <li>
-              <a href="01_sampling_distribution_of_statistic.ipynb"
-                >Sampling Distribution of Statistic</a
-              >
-            </li>
-            <li><a href="02_bootstrap.ipynb">Bootstrap</a></li>
-            <li>
-              <a href="03_normal_distribution.ipynb">Normal Distribution</a>
-            </li>
-            <li>
-              <a href="04_long_tailed_distributions.ipynb"
-                >Long Tailed Distributions</a
-              >
-            </li>
-            <li>
-              <a href="05_binomial_distribution.ipynb">Binomial Distribution</a>
-            </li>
-            <li>
-              <a href="06_chi_square_distribution.ipynb"
-                >Chi-Square Distribution</a
-              >
-            </li>
-            <li>
-              <a href="07_poisson_distributions.ipynb">Poisson Distribution</a>
-            </li>
-          </ul>
-        </li>
-
-        <li
-          data-base="/notes/practical_statistics_for_data_scientists/"
-          data-type="viewer"
-        >
-          <a href="03_statistical_experiments_and_significance_testing.jpg"
-            >Statistical Experiments and Significance Testing</a
-          >
-          <ul
-            data-base="/notes/practical_statistics_for_data_scientists/03_statistical_experiments_and_significance_testing/"
-            data-type="notebook"
-          >
-            <li><a href="01_permutation_test.ipynb">Permutation Test</a></li>
-            <li><a href="02_ab_testing.ipynb">A/B Testing</a></li>
-            <li><a href="03_t_test.ipynb">T-test</a></li>
-          </ul>
-        </li>
-      </ul>
+      <footer>
+        <p>
+          &copy; 2026 <a href="https://kavakci.dev">kavakci.dev</a> |
+          <a href="https://github.com/dybdeskarphet/statistics">source code</a>
+        </p>
+      </footer>
     </div>
-
-    <script>
-      document.querySelectorAll("[data-base]").forEach((container) => {
-        const base = container.dataset.base;
-        const defaultType = container.dataset.type;
-
-        container.querySelectorAll("a").forEach((link) => {
-          // Only process links where this container is the closest [data-base] ancestor
-          if (link.closest("[data-base]") !== container) return;
-
-          const type = link.parentElement.dataset.type || defaultType;
-          const prefix =
-            type === "notebook" ? "/notebook.html?src=" : "/viewer.html?src=";
-
-          link.href = prefix + base + link.getAttribute("href");
-        });
-      });
-    </script>
   </body>
 </html>

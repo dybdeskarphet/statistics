@@ -1,0 +1,67 @@
+[[sections]]
+title = "Notes and Practices from Think Stats"
+items = [
+  { title = "Exploratory Data Analysis", type = "nb", path = "notes/ts/01_exploratory_data_analysis.ipynb" },
+  { title = "Distributions", type = "nb", path = "notes/ts/02_distributions.ipynb" },
+  { title = "PMF (Probability Mass Functions)", type = "nb", path = "notes/ts/03_pmf.ipynb" },
+  { title = "CDF (Cumulative Distribution Functions)", type = "nb", path = "notes/ts/04_cdf.ipynb" },
+  { title = "Modeling Distributions", type = "nb", path = "notes/ts/05_modeling_distributions.ipynb" },
+  { title = "PDF (Probability Density Functions)", type = "nb", path = "notes/ts/06_probability_density_functions.ipynb" },
+  { title = "Relationship between variables", type = "nb", path = "notes/ts/07_relationship_between_variables.ipynb" },
+  { title = "Estimation", type = "nb", path = "notes/ts/08_estimation.ipynb" },
+]
+
+[[sections]]
+title = "Personal Practices"
+items = [
+  { title = "How is $\\bar{X} - \\bar{Y}$ normally distributed if $X$ and $Y$ are normally distributed?", items = [
+    { title = "Seeing that $(\\bar{X} - \\bar{Y})$ is normally distributed", type = "nb", path = "notes/self/01_xbar_minus_ybar.ipynb" },
+    { title = "Proof of $(\\bar{X} - \\bar{Y})$ estimators", type = "img", path = "notes/self/01_xbar_minus_ybar.jpg" },
+  ] },
+  { title = "From confidence interval derived from $\\chi^2$ to bootstrap confidence interval", type = "nb", path = "notes/self/02_what_is_chi_sqaure.ipynb" },
+  { title = "Is the z-transform of the sampling distribution of the sample mean of a binomial RV, a standard normal distribution?", type = "nb", path = "notes/self/04_z_transformation_of_binomial.ipynb" },
+  { title = "When is inverse-variance weighting useful?", type = "nb", path = "notes/self/05_inverse_variance_weigthing.ipynb" },
+  { title = "What are moment generating functions (MGFs)?", items = [
+    { title = "Power series", type = "img", path = "notes/self/07_power_series.jpg" },
+    { title = "Generating functions", type = "img", path = "notes/self/07_gen_func.jpg" },
+    { title = "Moment generating functions", type = "img", path = "notes/self/07_mgfs.jpg" },
+  ] },
+  { title = "What is the p-value?", type = "nb", path = "notes/self/08_what_does_p_value_mean.ipynb" },
+  { title = "What is MSE?", type = "img", path = "notes/self/10_mse.jpg" },
+  { title = "What is MLE?", type = "img", path = "notes/self/11_mle.jpg" },
+]
+
+[[sections]]
+title = "Notes from Jem N. Corcoran Lectures"
+items = [
+  { title = "Lecture 1 (RVs, PDFs, CDFs, Indicator Notation)", type = "img", path = "notes/jem/01_lecture.jpg" },
+  { title = "Lecture 2 (EV, Joint PDFs)", type = "img", path = "notes/jem/02_lecture.jpg" },
+  { title = "Lecture 3 (Joint PDFs, Integration Tricks)", type = "img", path = "notes/jem/03_lecture.jpg" },
+]
+
+[[sections]]
+title = "Notes and Practices from Practical Statistics for Data Scientists"
+items = [
+  { title = "Exploratory Data Analysis", type = "img", path = "notes/prac/01_exploratory_data_analysis.jpg", items = [
+    { title = "Location Estimates", type = "nb", path = "notes/prac/01_exploratory_data_analysis/01_location_estimates.ipynb" },
+    { title = "Variability Estimates", type = "nb", path = "notes/prac/01_exploratory_data_analysis/02_variability_estimates.ipynb" },
+    { title = "Exploring Data Distribution", type = "nb", path = "notes/prac/01_exploratory_data_analysis/03_exploring_data_distribution.ipynb" },
+    { title = "Exploring Binary and Categorical Data", type = "nb", path = "notes/prac/01_exploratory_data_analysis/04_exploring_binary_and_categorical_data.ipynb" },
+    { title = "Correlation", type = "nb", path = "notes/prac/01_exploratory_data_analysis/05_correlation.ipynb" },
+    { title = "Exploring Two or More Variables", type = "nb", path = "notes/prac/01_exploratory_data_analysis/06_exploring_two_or_more_variables.ipynb" },
+  ] },
+  { title = "Data and Sampling Distributions", type = "img", path = "notes/prac/02_data_and_sampling_distributions.jpg", items = [
+    { title = "Sampling Distribution of Statistic", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/01_sampling_distribution_of_statistic.ipynb" },
+    { title = "Bootstrap", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/02_bootstrap.ipynb" },
+    { title = "Normal Distribution", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/03_normal_distribution.ipynb" },
+    { title = "Long Tailed Distributions", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/04_long_tailed_distributions.ipynb" },
+    { title = "Binomial Distribution", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/05_binomial_distribution.ipynb" },
+    { title = "Chi-Square Distribution", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/06_chi_square_distribution.ipynb" },
+    { title = "Poisson Distribution", type = "nb", path = "notes/prac/02_data_and_sampling_distributions/07_poisson_distributions.ipynb" },
+  ] },
+  { title = "Statistical Experiments and Significance Testing", type = "img", path = "notes/prac/03_statistical_experiments_and_significance_testing.jpg", items = [
+    { title = "Permutation Test", type = "nb", path = "notes/prac/03_statistical_experiments_and_significance_testing/01_permutation_test.ipynb" },
+    { title = "A/B Testing", type = "nb", path = "notes/prac/03_statistical_experiments_and_significance_testing/02_ab_testing.ipynb" },
+    { title = "T-test", type = "nb", path = "notes/prac/03_statistical_experiments_and_significance_testing/03_t_test.ipynb" },
+  ] },
+]

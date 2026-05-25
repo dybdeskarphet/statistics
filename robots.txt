@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://statistics.kavakci.dev/sitemap.xml

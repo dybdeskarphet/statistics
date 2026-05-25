@@ -1,38 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notebook Viewer | kavakci.dev</title>
+    <meta
+      name="description"
+      content="Read Jupyter notebooks on statistics and data science."
+    />
+    <meta property="og:title" content="Notebook Viewer | Statistics" />
+    <meta property="og:type" content="article" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Notebook Viewer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hack/0.8.1/hack.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hack/0.8.1/dark.css"
+    />
+    <link rel="stylesheet" href="style.css" />
 
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
-  <link rel="stylesheet" href="/styles/prism-gruvbox-dark.css">
-  <link rel="stylesheet" href="/styles/notebook.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-dracula.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
-  <script>
-    window.MathJax = {
-      options: {enableMenu: true},
-      tex: {
-        inlineMath: [['$', '$'], ["\\(", "\\)"]]
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.6/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ansi_up@5.1.0/ansi_up.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/notebookjs@0.8.3/notebook.min.js"
+      onerror="console.error('notebook.html: notebookjs failed to load')"
+    ></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<body>
-  <div id="notebook-container"></div>
-  <a href="/index.html" id="back-btn" title="Back"><i class="ri-arrow-left-line"></i></a>
-  <button id="toggle-code-btn" title="Toggle Code"><i class="ri-code-s-slash-line"></i></button>
+    <script src="notebook-viewer.js" defer></script>
+  </head>
+  <body class="hack dark">
+    <div class="container">
+      <header>
+        <h1 id="notebook-title">Loading...</h1>
+        <p><a id="notebook-path" class="lead" download></a></p>
+        <div>
+          <a href="index.html" class="btn btn-default btn-ghost"
+            >&lt; Back to Notes</a
+          >
+        </div>
+      </header>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/notebookjs@0.6.6/notebook.min.js"></script>
+      <div id="notebook-container"></div>
 
-  <script src="/scripts/notebook.js"></script>
-</body>
-
+      <hr />
+      <footer>
+        <p>
+          &copy; 2026 <a href="https://kavakci.dev">kavakci.dev</a> |
+          <a href="https://github.com/dybdeskarphet/statistics">source code</a>
+        </p>
+      </footer>
+    </div>
+  </body>
 </html>
