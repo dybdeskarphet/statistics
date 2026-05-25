@@ -16,15 +16,21 @@ async function loadContent() {
 
       const titleMatch = block.match(/^title\s*=\s*("[^"]*")/m);
       if (titleMatch) {
-        try { section.title = JSON.parse(titleMatch[1]); }
-        catch (e) { section.title = titleMatch[1].replace(/^"|"$/g, ""); }
+        try {
+          section.title = JSON.parse(titleMatch[1]);
+        } catch (e) {
+          section.title = titleMatch[1].replace(/^"|"$/g, "");
+        }
       }
 
-      const itemsContent = extractArrayFromSegment(block, 0); 
+      const itemsContent = extractArrayFromSegment(block, 0);
       if (itemsContent) {
         section.items = parseObjectsInArray(itemsContent);
       } else {
-        const notesContent = extractArrayFromSegment(block.replace('title =', 'xxx ='), 0);
+        const notesContent = extractArrayFromSegment(
+          block.replace("title =", "xxx ="),
+          0,
+        );
         if (notesContent) section.items = parseObjectsInArray(notesContent);
       }
 
@@ -38,8 +44,8 @@ async function loadContent() {
     }
 
     const loadingMsg = container.querySelector("p");
-    if (loadingMsg && loadingMsg.innerText.includes("Loading")) loadingMsg.remove();
-
+    if (loadingMsg && loadingMsg.innerText.includes("Loading"))
+      loadingMsg.remove();
   } catch (err) {
     console.error("Content Load Error:", err);
     container.innerHTML = `<div class="alert alert-error">Error loading content: ${err.message}</div>`;
@@ -49,7 +55,7 @@ async function loadContent() {
 function extractArrayFromSegment(text, startIdx) {
   const match = text.substring(startIdx).match(/\w+\s*=\s*\[/);
   if (!match) return null;
-  
+
   const absoluteStart = startIdx + match.index + match[0].length - 1;
   let bracketCount = 0;
   let openerFound = false;
@@ -96,11 +102,14 @@ function parseObjectsInArray(text) {
         objects.push(parseObjectProperties(objText));
         let count = 0;
         for (let j = i; j < text.length; j++) {
-            if (text[j] === '{') count++;
-            if (text[j] === '}') {
-                count--;
-                if (count === 0) { i = j; break; }
+          if (text[j] === "{") count++;
+          if (text[j] === "}") {
+            count--;
+            if (count === 0) {
+              i = j;
+              break;
             }
+          }
         }
       }
     }
@@ -111,22 +120,45 @@ function parseObjectsInArray(text) {
 
 function parseObjectProperties(text) {
   const obj = {};
+  let cleanedText = text;
 
   const arrayMatch = text.match(/(\w+)\s*=\s*\[/);
   if (arrayMatch) {
     const key = arrayMatch[1];
-    const content = extractArrayFromSegment(text, arrayMatch.index);
-    if (content !== null) {
-        obj[key] = parseObjectsInArray(content);
+    let absoluteStart = arrayMatch.index + arrayMatch[0].length - 1;
+    let bracketCount = 0;
+    let openerFound = false;
+    let endIdx = -1;
+    for (let i = absoluteStart; i < text.length; i++) {
+      if (text[i] === "[") {
+        bracketCount++;
+        openerFound = true;
+      } else if (text[i] === "]") {
+        bracketCount--;
+        if (bracketCount === 0 && openerFound) {
+          endIdx = i;
+          break;
+        }
+      }
+    }
+
+    if (endIdx !== -1) {
+      const content = text.substring(absoluteStart + 1, endIdx);
+      obj[key] = parseObjectsInArray(content);
+      cleanedText =
+        text.substring(0, arrayMatch.index) + text.substring(endIdx + 1);
     }
   }
 
   const pairRegex = /(\w+)\s*=\s*("[^"]*")/g;
   let match;
-  while ((match = pairRegex.exec(text)) !== null) {
+  while ((match = pairRegex.exec(cleanedText)) !== null) {
     const key = match[1];
-    try { obj[key] = JSON.parse(match[2]); }
-    catch (e) { obj[key] = match[2].replace(/^"|"$/g, ""); }
+    try {
+      obj[key] = JSON.parse(match[2]);
+    } catch (e) {
+      obj[key] = match[2].replace(/^"|"$/g, "");
+    }
   }
   return obj;
 }
@@ -148,20 +180,20 @@ function renderSection(section, container) {
 
 function renderList(items) {
   const ul = document.createElement("ul");
-  items.forEach(item => {
+  items.forEach((item) => {
     const li = document.createElement("li");
-    
+
     if (item.items) {
-        li.innerText = item.title;
-        li.appendChild(renderList(item.items));
-    } 
-    else {
-        const viewer = item.type === "nb" ? "notebook.html?nb=" : "viewer.html?img=";
-        let html = `<a href="${viewer}${item.path}">${item.title}</a>`;
-        if (item.extra_img) {
-          html += ` (<a href="viewer.html?img=${item.extra_img}">img</a>)`;
-        }
-        li.innerHTML = html;
+      li.innerText = item.title;
+      li.appendChild(renderList(item.items));
+    } else {
+      const viewer =
+        item.type === "nb" ? "notebook.html?nb=" : "viewer.html?img=";
+      let html = `<a href="${viewer}${item.path}">${item.title}</a>`;
+      if (item.extra_img) {
+        html += ` (<a href="viewer.html?img=${item.extra_img}">img</a>)`;
+      }
+      li.innerHTML = html;
     }
     ul.appendChild(li);
   });
