@@ -8,9 +8,9 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.1
 #   kernelspec:
-#     display_name: .venv
+#     display_name: venv
 #     language: python
-#     name: python3
+#     name: venv
 # ---
 
 # %% [markdown]
@@ -179,7 +179,7 @@ r"""
 
 At this point, we have a complete set of ways to represent distributions: PMFs, CDFs and PDFs. Now, let's learn how to transform one to another.
 
-<img src="/notes/think_stats/assets/distribution_framework.png" height="300"/>
+<img src="/notes/ts/assets/distribution_framework.png" height="300"/>
 """
 
 # %% [markdown]
