@@ -110,7 +110,7 @@ And for the log-likelihood function, we have the following.
 $$
 \begin{aligned}
 \mathtt{np.sum(...)} : l(\mu) = \sum_{i=1}^{5} \ln\big(f(x_i \mid \mu, \sigma)\big) \\\\
-\mathtt{\text{log_likelihoods} = \begin{bmatrix} \ell(\mu_1) \\\\ \ell(\mu_2) \\\\ \vdots \\\\ \ell(\mu_{500}) \end{bmatrix}
+\mathtt{\text{log_likelihoods}} = \begin{bmatrix} \ell(\mu_1) \\\\ \ell(\mu_2) \\\\ \vdots \\\\ \ell(\mu_{500}) \end{bmatrix}
 \end{aligned}
 $$
 """
