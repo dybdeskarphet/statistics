@@ -29,6 +29,7 @@ items = [
   { title = "What is the p-value?", type = "nb", path = "notes/self/08_what_does_p_value_mean.ipynb" },
   { title = "What is MSE?", type = "img", path = "notes/self/10_mse.jpg" },
   { title = "What is MLE?", type = "img", path = "notes/self/11_mle.jpg" },
+  { title = "What is Fisher Information?", type = "nb", path = "notes/self/12_fisher_info.ipynb" },
 ]
 
 [[sections]]
