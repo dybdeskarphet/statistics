@@ -90,9 +90,9 @@ The mathematical equivalents of the relevant lines are as follows (for the likel
 
 $$
 \begin{aligned}
-\verb|norm.pdf(api_logs, ...)| : f(x_i \mid \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \\\\
-\verb|np.prod(...)| : L(\mu) = \prod_{i=1}^{5} f(x_i \mid \mu, \sigma) \\\\
-\verb|raw_likelihoods| = \begin{bmatrix} L(\mu_1) \\\\ L(\mu_2) \\\\ \vdots \\\\ L(\mu_{500}) \end{bmatrix}
+\mathtt{norm.pdf(api_logs, ...)} : f(x_i \mid \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x_i - \mu)^2}{2\sigma^2} \right) \\\\
+\mathtt{np.prod(...)} : L(\mu) = \prod_{i=1}^{5} f(x_i \mid \mu, \sigma) \\\\
+\mathtt{\text{raw_likelihoods}} = \begin{bmatrix} L(\mu_1) \\\\ L(\mu_2) \\\\ \vdots \\\\ L(\mu_{500}) \end{bmatrix}
 \end{aligned}
 $$
 """
@@ -110,7 +110,7 @@ And for the log-likelihood function, we have the following.
 $$
 \begin{aligned}
 \mathtt{np.sum(...)} : l(\mu) = \sum_{i=1}^{5} \ln\big(f(x_i \mid \mu, \sigma)\big) \\\\
-\mathtt{log\_likelihoods} = \begin{bmatrix} l(\mu_1) \\\\ l(\mu_2) \\\\ \vdots \\\\ l(\mu_{500}) \end{bmatrix}
+\mathtt{\text{log_likelihoods} = \begin{bmatrix} l(\mu_1) \\\\ l(\mu_2) \\\\ \vdots \\\\ l(\mu_{500}) \end{bmatrix}
 \end{aligned}
 $$
 """
