@@ -101,7 +101,7 @@ $$
 raw_likelihoods = np.array(
     [np.prod(norm.pdf(api_logs, loc=guess, scale=KNOWN_SIGMA)) for guess in mu_guesses]
 )
-raw_likelihoods
+raw_likelihoods[:5]
 
 # %% [markdown]
 r"""
@@ -122,7 +122,7 @@ log_likelihoods = np.array(
         for guess in mu_guesses
     ]
 )
-log_likelihoods
+log_likelihoods[:5]
 
 # %%
 log_likelihoods_50 = np.array(
@@ -131,6 +131,7 @@ log_likelihoods_50 = np.array(
         for guess in mu_guesses
     ]
 )
+log_likelihoods_50[:5]
 
 # %% [markdown]
 r"""
