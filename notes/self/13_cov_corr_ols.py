@@ -21,8 +21,8 @@ First, we define two random variables with sample size ($n$) 500.
 
 $$
 \begin{gathered}
-X \sim Exp(\lambda=0.5) \\
-\epsilon \sim \mathcal{N}(\mu=9, \sigma^2=4) \\
+X \sim Exp(\lambda=0.5) \\\\
+\epsilon \sim \mathcal{N}(\mu=9, \sigma^2=4) \\\\
 Y \sim 3X + \epsilon
 \end{gathered}
 $$
@@ -46,7 +46,7 @@ Since we are interested in calculating the covariance, let’s calculate the dev
 
 $$
 \begin{gathered}
-\text{dev_X} = X_i - \bar{X} \\
+\text{dev_X} = X_i - \bar{X} \\\\
 \text{dev_Y} = Y_i - \bar{Y}
 \end{gathered}
 $$
@@ -92,8 +92,10 @@ r"""
 The only difference between correlation and covariance is that correlation is normalized.
 
 $$
-z_X = \frac{X_i - E[X]}{\sigma_X} \\
+\begin{gathered}
+z_X = \frac{X_i - E[X]}{\sigma_X} \\\\
 z_Y = \frac{Y_i - E[Y]}{\sigma_Y}
+\end{gathered}
 $$
 """
 
@@ -211,7 +213,7 @@ plt.show()
 
 # %% [markdown]
 r"""
-From our graph, we can also see that we have aligned the point where the line intersects the Y-axis ($\beta_0$) with the point where the line passes through the midpoints of both the X-axis and the Y-axis.
+From our graph, we can also see that we have aligned the point where the line intersects the Y-axis ($\beta_0$) with the point where the line passes through the means of both X and Y.
 """
 
 # %%
