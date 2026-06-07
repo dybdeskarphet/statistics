@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const nbTitle = document.getElementById("notebook-title");
   const nbPathDisplay = document.getElementById("notebook-path");
   const container = document.getElementById("notebook-container");
+  const toggleBtn = document.getElementById("toggle-code");
+
+  toggleBtn?.addEventListener("click", () => {
+    const isHidden = container.classList.toggle("hide-code");
+    toggleBtn.innerText = isHidden ? "Show Code" : "Hide Code";
+  });
 
   if (!nbPath) {
     if (nbTitle) nbTitle.innerText = "No notebook specified.";

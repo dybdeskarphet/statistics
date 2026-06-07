@@ -41,6 +41,10 @@
   transition: opacity 0.2s ease-in;
 }
 
+#notebook-container.hide-code .nb-input {
+  display: none;
+}
+
 #notebook-container.is-ready {
   opacity: 1;
 }

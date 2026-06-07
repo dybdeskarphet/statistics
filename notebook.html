@@ -59,9 +59,16 @@
         <h1 id="notebook-title">Loading...</h1>
         <p><a id="notebook-path" class="lead" download></a></p>
         <div>
-          <a href="index.html" class="btn btn-default btn-ghost"
-            >&lt; Back to Notes</a
+          <button
+            onclick="location.href='index.html'"
+            class="btn btn-default btn-ghost"
           >
+            &lt; Back to Notes
+          </button>
+          &nbsp;
+          <button id="toggle-code" class="btn btn-success btn-ghost">
+            Hide Code
+          </button>
         </div>
       </header>
 
