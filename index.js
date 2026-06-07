@@ -37,15 +37,21 @@ async function loadContent() {
       renderSection(section, container);
     });
 
-    if (window.MathJax) {
+    const finalize = () => {
+      const loadingMsg = container.querySelector("p");
+      if (loadingMsg && loadingMsg.innerText.includes("Loading"))
+        loadingMsg.remove();
+      container.classList.add("is-ready");
+    };
+
+    if (window.MathJax && window.MathJax.startup) {
       window.MathJax.startup.promise
         .then(() => window.MathJax.typesetPromise([container]))
-        .catch((err) => console.error("MathJax error:", err));
+        .catch((err) => console.error("MathJax error:", err))
+        .finally(finalize);
+    } else {
+      finalize();
     }
-
-    const loadingMsg = container.querySelector("p");
-    if (loadingMsg && loadingMsg.innerText.includes("Loading"))
-      loadingMsg.remove();
   } catch (err) {
     console.error("Content Load Error:", err);
     container.innerHTML = `<div class="alert alert-error">Error loading content: ${err.message}</div>`;
