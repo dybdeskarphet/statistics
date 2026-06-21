@@ -137,7 +137,7 @@ $$
 First, let’s define $\beta_1$:
 
 $$
-\beta_1 = \frac{Cov(X,Y)}{Var(Y)}
+\beta_1 = \frac{Cov(X,Y)}{Var(X)}
 $$
 
 The result of this calculation will tell us how much Y changes for every unit change in X. This makes perfect sense when we consider that covariance measures the “rate of joint change.”
